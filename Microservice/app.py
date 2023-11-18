@@ -9,7 +9,7 @@ conn = pymysql.connect(
     password="AVNS_9ZVRUDfaIDQXFi0H9r1",
     port=27477,
     cursorclass=pymysql.cursors.DictCursor,
-	 database="products",
+    database="products",
 )
 cur = conn.cursor()
 
@@ -117,6 +117,31 @@ class LoginClass:
             resp.status = falcon.HTTP_400
             resp.body = json.dumps(result)
 
+class ProductCatalog:
+    def on_post(self, req, resp):
+            sQry = "select * from product_list ;"
+
+            print(sQry)
+            cur = conn.cursor()
+            cur.execute(sQry)
+            result_set = cur.fetchall()
+            if result_set is not None:
+                product_details = []
+                for i in result_set:
+                    product_details.append(
+                        {
+                            "id": i["product_id"],
+                            "name": i["product_name"],
+                            "product_description": i["product_description"],
+                            "quantity": i["quantity"],
+                        }
+                    )
+                resp.status = falcon.HTTP_200
+                resp.body = json.dumps(product_details)
+            else:
+                result = {"error": "no items found in catalog."}
+                resp.status = falcon.HTTP_400
+                resp.body = json.dumps(result)
 
 class ProductDetails:
     def on_post(self, req, resp):
@@ -148,7 +173,7 @@ class ProductDetails:
                         {
                             "id": i["product_id"],
                             "name": i["product_name"],
-                            "product description": i["product_description"],
+                            "product_description": i["product_description"],
                             "quantity": i["quantity"],
                         }
                     )
@@ -166,10 +191,10 @@ api.add_route("/register", RegisterClass())
 
 api.add_route("/login", LoginClass())
 api.add_route("/get-product-details", ProductDetails())
+api.add_route("/get-product-catalog", ProductCatalog())
 
 # remove this in prod
-# if __name__ == "__main__":
-#     with make_server("", 5000, api) as httpd:
-#         print("Serving on port 5000...")
-#         httpd.serve_forever()
-
+if __name__ == "__main__":
+    with make_server("", 5000, api) as httpd:
+        print("Serving on port 5000...")
+        httpd.serve_forever()
