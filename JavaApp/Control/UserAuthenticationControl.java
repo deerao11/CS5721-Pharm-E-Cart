@@ -18,6 +18,7 @@ public class UserAuthenticationControl {
         this.password = password;
     }
 
+        
     public boolean authenticate() {
         try {
             var uri = URI.create("https://falconer2-71714182580c.herokuapp.com/login");
@@ -32,6 +33,7 @@ public class UserAuthenticationControl {
             HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.statusCode());
             System.out.println(response.body());
+
             if (response.statusCode() == 200)
             return true;
             else

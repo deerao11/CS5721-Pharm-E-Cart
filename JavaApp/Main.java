@@ -1,9 +1,23 @@
+import java.util.List;
 import java.util.Scanner;
 import Boundary.LoginPage;
+import Boundary.ProductFetcher;
 import Boundary.RegisterPage;
+import model.ProductDetail;
+
+//1. deploy python code
+//2. refractor java codevv, remove unwated imports/variable/classes/functions etc etc
+//3. show product catalog after login
 
 public class Main {
     public static void main(String[] args) {
+
+        ProductFetcher productFetcher = new ProductFetcher();
+        List<ProductDetail> productDetails = productFetcher.fetchdata();
+        System.out.println("Available Products : \n");
+        productDetails.forEach(productDetail -> {
+            System.out.println("product name : "+productDetail.getName());
+        });
 
         System.out.println();
         System.out.println("Enter R to register and L to login");
@@ -12,7 +26,7 @@ public class Main {
         String confirmMsg = input.nextLine();
 
         //Register
-        if(confirmMsg.equals("R") || confirmMsg.equals("r")){
+        if(confirmMsg.equalsIgnoreCase("R") ){
             RegisterPage registerPage = new RegisterPage();
             registerPage.start();
             registered = registerPage.register();
@@ -25,8 +39,16 @@ public class Main {
             boolean loggedIn = loginPage.login();
             if (loggedIn == true) {
                 System.out.println("LOGGED IN SUCCESSFULLY");
+            
+                //assume that it has been pushed
+
+//                ProductFetcher productFetcher = new ProductFetcher();
+//                List<ProductDetail> productList = productFetcher.fetchdata();
+//                System.out.println("product size : "+productList.size());
+        
             }
         }
+
         
     }
 }

@@ -2,8 +2,9 @@ package Boundary;
 
 import java.util.Scanner;
 import Control.UserAuthenticationControl;
+import utils.Page;
 
-public class LoginPage extends Page{
+public class LoginPage extends Page {
     private String userId;
     private String password;
 
