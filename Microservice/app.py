@@ -53,7 +53,6 @@ class RegisterClass:
 class LoginClass:
 	def on_post(self,req,resp):
 		data = json.loads(req.stream.read())
-		print(data)
 		if 'username' in data and 'password' in data:
 			sQry = "select * from `users`.customer where username = '{0}'".format(data['username'])
 			print(sQry)
@@ -85,9 +84,31 @@ class LoginClass:
 			resp.body = json.dumps(result)
 		
 
+class GetProductsClass:
+	def on_post(self,req,resp):
+		data = json.loads(req.stream.read())
+		if 'category_id' in data:
+			sQry = "select * from `products`.product_list where category_id = '{0}'".format(int(data['category_id']))
+			cur = conn.cursor()
+			cur.execute(sQry)
+			result = cur.fetchall()
+			print(result)
+			result_list = []
+			for row in result:
+				result_list.append(row)
+			
+			resp.status = falcon.HTTP_200
+			resp.body = json.dumps(result_list)
+		else:
+			result = {"error":"required params missing"}
+			resp.status = falcon.HTTP_400
+			resp.body = json.dumps(result)
+
 
 
 api = falcon.API()
 api.add_route('/register',RegisterClass())
 
 api.add_route('/login',LoginClass())
+
+api.add_route('/get-products', GetProductsClass())
