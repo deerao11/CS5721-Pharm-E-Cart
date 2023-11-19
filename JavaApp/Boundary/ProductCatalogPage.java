@@ -31,8 +31,8 @@ public class ProductCatalogPage extends Page{
 
     public void displayCatalogList(){
 
-        System.out.println("001) prescribed medicine");
-        System.out.println("002) unprescribed medicine");
+        System.out.println("1) Prescribed Medicine");
+        System.out.println("2) Unprescribed Medicine");
         System.out.println();
 
         // selectCatalog(catalogNumber);
