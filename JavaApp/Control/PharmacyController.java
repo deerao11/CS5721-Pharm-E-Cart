@@ -17,7 +17,7 @@ public class PharmacyController implements IObserver {
     }
 
     public void manageCancellation(String OrderId) {
-
+//notify pharmacist? about cancellation.
     }
 
 }
