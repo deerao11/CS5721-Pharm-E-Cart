@@ -1,6 +1,6 @@
 package Boundary;
 
-public class MainPage extends Page{
+public class MainPage extends Page {
     public void start(){
         System.out.println("\nWelcome to main page.");
         drawDivider("*");

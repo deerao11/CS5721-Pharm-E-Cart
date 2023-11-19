@@ -1,7 +1,10 @@
+import java.util.List;
 import java.util.Scanner;
 import Boundary.LoginPage;
+import Boundary.ProductFetcher;
 import Boundary.RegisterPage;
 import Boundary.ProductCatalogPage;
+import model.ProductDetail;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,27 +16,44 @@ public class Main {
         String confirmMsg = input.nextLine();
 
         //Register
-        if(confirmMsg.equals("R") || confirmMsg.equals("r")){
+        if(confirmMsg.equalsIgnoreCase("R") ){
             RegisterPage registerPage = new RegisterPage();
             registerPage.start();
             registered = registerPage.register();
         }
+
 
         // Login
         if(confirmMsg.equals("L") || confirmMsg.equals("l") || registered == true){
             LoginPage loginPage = new LoginPage();
             loginPage.start();
             boolean loggedIn = loginPage.login();
-            if (loggedIn == true) {
+            if (loggedIn) {
                 System.out.println("LOGGED IN SUCCESSFULLY");
+
+                // Product-Catalog
+                ProductCatalogPage productCatalogPage = new ProductCatalogPage();
+                productCatalogPage.start();
+                productCatalogPage.displayCatalogList();
+                String catalogNumber = productCatalogPage.selectCatalog();
+
+
+                ProductFetcher productFetcher = new ProductFetcher();
+                List<ProductDetail> productDetails = productFetcher.fetchData(catalogNumber);
+                System.out.println(String.format("Available Products for catalog number %s : \n",catalogNumber ));
+                productDetails.forEach(productDetail -> {
+                    System.out.println("Product name: " + productDetail.getName() +
+                            ", Product description: " + productDetail.getDescription() +
+                            ", Quantity: " + productDetail.getQuantity() +
+                            ", Price: " + productDetail.getPrice() +
+                            ", Category ID: " + productDetail.getCategory());
+
+                });
+
             }
-        
-        // Product-Catalog
-        ProductCatalogPage productCatalogPage = new ProductCatalogPage();
-        productCatalogPage.start();
-        productCatalogPage.displayCatalogList();
-        productCatalogPage.selectCatalog();
-        
+
+
+
         }
     }
 }

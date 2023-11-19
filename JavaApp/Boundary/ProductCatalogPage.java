@@ -1,7 +1,7 @@
 package Boundary;
 
 import java.util.Scanner;
-import java.util.Vector;
+
 
 public class ProductCatalogPage extends Page{
     private String catalogNumber;
@@ -17,7 +17,7 @@ public class ProductCatalogPage extends Page{
         System.out.println();
     }
 
-    public void selectCatalog(){
+    public String selectCatalog(){
 
         Scanner input = new Scanner(System.in);
         
@@ -26,6 +26,7 @@ public class ProductCatalogPage extends Page{
         catalogNumber = input.nextLine();
             
         System.out.println();
+        return catalogNumber;
     }
 
 
