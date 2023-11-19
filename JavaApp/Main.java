@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import Boundary.LoginPage;
 import Boundary.RegisterPage;
+import Boundary.ProductCatalogPage;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,7 +27,13 @@ public class Main {
             if (loggedIn == true) {
                 System.out.println("LOGGED IN SUCCESSFULLY");
             }
-        }
         
+        // Product-Catalog
+        ProductCatalogPage productCatalogPage = new ProductCatalogPage();
+        productCatalogPage.start();
+        productCatalogPage.displayCatalogList();
+        productCatalogPage.selectCatalog();
+        
+        }
     }
 }
