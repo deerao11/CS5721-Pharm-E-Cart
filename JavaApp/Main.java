@@ -3,16 +3,11 @@ import java.util.Scanner;
 import Boundary.LoginPage;
 import Boundary.ProductFetcher;
 import Boundary.RegisterPage;
+import Boundary.ProductCatalogPage;
 import model.ProductDetail;
-
-//1. deploy python code
-//2. refactor java codevv, remove unwated imports/variable/classes/functions etc etc
-//3. show product catalog after login
 
 public class Main {
     public static void main(String[] args) {
-
-
 
         System.out.println();
         System.out.println("Enter R to register and L to login");
@@ -32,11 +27,19 @@ public class Main {
             LoginPage loginPage = new LoginPage();
             loginPage.start();
             boolean loggedIn = loginPage.login();
-            if (loggedIn == true) {
+            if (loggedIn) {
                 System.out.println("LOGGED IN SUCCESSFULLY");
+
+                // Product-Catalog
+                ProductCatalogPage productCatalogPage = new ProductCatalogPage();
+                productCatalogPage.start();
+                productCatalogPage.displayCatalogList();
+                String catalogNumber = productCatalogPage.selectCatalog();
+
+
                 ProductFetcher productFetcher = new ProductFetcher();
-                List<ProductDetail> productDetails = productFetcher.fetchdata();
-                System.out.println("Available Products : \n");
+                List<ProductDetail> productDetails = productFetcher.fetchData(catalogNumber);
+                System.out.println(String.format("Available Products for catalog number %s : \n",catalogNumber ));
                 productDetails.forEach(productDetail -> {
                     System.out.println("Product name: " + productDetail.getName() +
                             ", Product description: " + productDetail.getDescription() +
@@ -44,13 +47,12 @@ public class Main {
                             ", Price: " + productDetail.getPrice() +
                             ", Category ID: " + productDetail.getCategory());
 
-//                     Uncomment the following code if you want to fetch additional data
-//                     ProductFetcher productFetcher = new ProductFetcher();
-//                     List<ProductDetail> productList = productFetcher.fetchdata();
-//                     System.out.println("Product size: " + productList.size());
                 });
-        }
 
-        
+            }
+
+
+
+        }
     }
-}}
+}

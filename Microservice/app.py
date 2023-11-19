@@ -119,7 +119,11 @@ class LoginClass:
 
 class ProductCatalog:
     def on_post(self, req, resp):
+            data = json.loads(req.stream.read())
             sQry = "select * from product_list ;"
+            if "catalogNumber" in data:
+                sQry = f"select * from product_list where category_id='{data['catalogNumber']}';"
+
 
             print(sQry)
             cur = conn.cursor()
@@ -134,6 +138,8 @@ class ProductCatalog:
                             "name": i["product_name"],
                             "product_description": i["product_description"],
                             "quantity": i["quantity"],
+                            "price":i["price"],
+                            "category_id":i["category_id"]
                         }
                     )
                 resp.status = falcon.HTTP_200
@@ -175,6 +181,7 @@ class ProductDetails:
                             "name": i["product_name"],
                             "product_description": i["product_description"],
                             "quantity": i["quantity"],
+                            "price":i["price"],
                         }
                     )
 
@@ -185,6 +192,26 @@ class ProductDetails:
                 resp.status = falcon.HTTP_400
                 resp.body = json.dumps(result)
 
+class GetProductsClass:
+	def on_post(self,req,resp):
+		data = json.loads(req.stream.read())
+		if 'category_id' in data:
+			sQry = "select * from `products`.product_list where category_id = '{0}'".format(int(data['category_id']))
+			cur = conn.cursor()
+			cur.execute(sQry)
+			result = cur.fetchall()
+			print(result)
+			result_list = []
+			for row in result:
+				result_list.append(row)
+
+			resp.status = falcon.HTTP_200
+			resp.body = json.dumps(result_list)
+		else:
+			result = {"error":"required params missing"}
+			resp.status = falcon.HTTP_400
+			resp.body = json.dumps(result)
+
 
 api = falcon.API()
 api.add_route("/register", RegisterClass())
@@ -192,6 +219,7 @@ api.add_route("/register", RegisterClass())
 api.add_route("/login", LoginClass())
 api.add_route("/get-product-details", ProductDetails())
 api.add_route("/get-product-catalog", ProductCatalog())
+api.add_route('/get-products', GetProductsClass())
 
 # remove this in prod
 if __name__ == "__main__":
