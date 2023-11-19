@@ -1,7 +1,5 @@
 package Boundary;
 
-import utils.Page;
-
 import java.util.Scanner;
 
 

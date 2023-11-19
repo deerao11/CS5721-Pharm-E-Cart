@@ -22,6 +22,7 @@ public class Main {
             registered = registerPage.register();
         }
 
+
         // Login
         if(confirmMsg.equals("L") || confirmMsg.equals("l") || registered == true){
             LoginPage loginPage = new LoginPage();

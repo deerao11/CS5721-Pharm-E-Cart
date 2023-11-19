@@ -2,7 +2,6 @@ package Boundary;
 
 import java.util.Scanner;
 import Control.UserAuthenticationControl;
-import utils.Page;
 
 public class RegisterPage extends Page {
     private String fName, lName, emailId, username, password, ppsn, address, eircode;
