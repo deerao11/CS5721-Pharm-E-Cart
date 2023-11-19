@@ -29,8 +29,8 @@ public class RegisterPage extends Page {
         System.out.print("Username: ");
         username = input.nextLine();
 
-        System.out.print("Password: ");
-        password = input.nextLine();
+        char[] hiddenPassword = System.console().readPassword("Password: ");
+        password = String.valueOf(hiddenPassword);
 
         System.out.print("PPSN No: ");
         ppsn = input.nextLine();
@@ -48,9 +48,9 @@ public class RegisterPage extends Page {
 
         displayRegisterForm();
 
-        UserAuthenticationControl userAuthenticationControl = new UserAuthenticationControl(username, password);
+        UserAuthenticationControl userAuthenticationControl = new UserAuthenticationControl(fName, lName, username, password, ppsn, address, eircode, emailId);
 
-        if(!(userAuthenticationControl.register(fName, lName, username, password, ppsn, address, eircode, emailId))){
+        if(!(userAuthenticationControl.register())){
             registrationFail();
             return false;
         }

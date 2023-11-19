@@ -1,6 +1,7 @@
 package Boundary;
 
 import java.util.Scanner;
+import java.io.Console;
 import Control.UserAuthenticationControl;
 
 public class LoginPage extends Page {
@@ -21,8 +22,8 @@ public class LoginPage extends Page {
         System.out.print("User ID: ");
         userId = input.nextLine();
 
-        System.out.print("Password: ");
-        password = input.nextLine();
+        char[] hiddenPassword = System.console().readPassword("Password: ");
+        password = String.valueOf(hiddenPassword);
         
         System.out.println();
     }
