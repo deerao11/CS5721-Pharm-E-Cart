@@ -3,9 +3,9 @@ package Boundary;
 import utils.Page;
 
 import java.util.Scanner;
-import java.util.Vector;
 
-public class ProductCatalogPage extends Page {
+
+public class ProductCatalogPage extends Page{
     private String catalogNumber;
     private String productNumber;
 
@@ -34,8 +34,8 @@ public class ProductCatalogPage extends Page {
 
     public void displayCatalogList(){
 
-        System.out.println("001) prescribed medicine");
-        System.out.println("002) unprescribed medicine");
+        System.out.println("1) Prescribed Medicine");
+        System.out.println("2) Unprescribed Medicine");
         System.out.println();
 
         // selectCatalog(catalogNumber);
