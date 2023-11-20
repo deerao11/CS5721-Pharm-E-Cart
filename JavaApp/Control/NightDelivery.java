@@ -1,4 +1,4 @@
-// Concrete decorator for evening delivery
+// Concrete decorator for Night delivery
 public class NightDelivery extends DeliveryDecorator {
     public NightDelivery(Delivery decoratedDelivery) {
         super(decoratedDelivery);
@@ -6,6 +6,6 @@ public class NightDelivery extends DeliveryDecorator {
 
     @Override
     public double calculateDeliveryCost() {
-        return super.calculateDeliveryCost() + 5; // Evening delivery charge is 5 euro
+        return super.calculateDeliveryCost() + 5; // Night delivery charge is 5 euro
     }
 }
