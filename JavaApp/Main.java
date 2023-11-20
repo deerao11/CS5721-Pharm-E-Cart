@@ -26,13 +26,14 @@ public class Main {
             boolean loggedIn = loginPage.login();
             if (loggedIn == true) {
                 System.out.println("LOGGED IN SUCCESSFULLY");
+                // Product-Catalog
+                ProductCatalogPage productCatalogPage = new ProductCatalogPage();
+                productCatalogPage.start();
+                productCatalogPage.displayCatalogList();
+                productCatalogPage.selectCatalog();
             }
         
-        // Product-Catalog
-        ProductCatalogPage productCatalogPage = new ProductCatalogPage();
-        productCatalogPage.start();
-        productCatalogPage.displayCatalogList();
-        productCatalogPage.selectCatalog();
+        
         
         }
     }
