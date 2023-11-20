@@ -3,7 +3,7 @@ package Boundary;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import model.ProductDetail;
+import Entity.ProductDetail;
 
 import java.net.URI;
 import java.util.ArrayList;

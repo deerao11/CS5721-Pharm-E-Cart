@@ -4,7 +4,7 @@ import Boundary.LoginPage;
 import Boundary.ProductFetcher;
 import Boundary.RegisterPage;
 import Boundary.ProductCatalogPage;
-import model.ProductDetail;
+import Entity.ProductDetail;
 
 public class Main {
     public static void main(String[] args) {

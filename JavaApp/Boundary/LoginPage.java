@@ -3,6 +3,7 @@ package Boundary;
 import java.util.Scanner;
 import java.io.Console;
 import Control.UserAuthenticationControl;
+import Boundary.Page;
 
 public class LoginPage extends Page {
     private String userId;
