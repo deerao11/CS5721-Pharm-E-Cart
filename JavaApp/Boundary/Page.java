@@ -6,7 +6,7 @@ public class Page {
         System.out.println("【Page title】");
         drawDivider("*");
     }
-    public static void drawDivider(String s){
+    public void drawDivider(String s){
         for (int i=0; i<80; i++){
             System.out.print(s);
         }
