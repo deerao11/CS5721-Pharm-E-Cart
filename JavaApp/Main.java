@@ -1,10 +1,7 @@
-import java.util.List;
 import java.util.Scanner;
 import Boundary.LoginPage;
-import Boundary.ProductFetcher;
 import Boundary.RegisterPage;
 import Boundary.ProductCatalogPage;
-import Entity.ProductDetail;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,21 +32,6 @@ public class Main {
                 ProductCatalogPage productCatalogPage = new ProductCatalogPage();
                 productCatalogPage.start();
                 productCatalogPage.displayCatalogList();
-                String catalogNumber = productCatalogPage.selectCatalog();
-
-
-                ProductFetcher productFetcher = new ProductFetcher();
-                List<ProductDetail> productDetails = productFetcher.fetchData(catalogNumber);
-                System.out.println(String.format("Available Products for catalog number %s : \n",catalogNumber ));
-                productDetails.forEach(productDetail -> {
-                    System.out.println("Product name: " + productDetail.getName() +
-                            ", Product description: " + productDetail.getDescription() +
-                            ", Quantity: " + productDetail.getQuantity() +
-                            ", Price: " + productDetail.getPrice() +
-                            ", Category ID: " + productDetail.getCategory());
-
-                });
-
             }
 
 
