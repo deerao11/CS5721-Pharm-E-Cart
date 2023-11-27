@@ -1,7 +1,7 @@
 package Boundary;
 
 import java.util.*;
-import Boundary.ProductFetcher;
+import Boundary.ProductRepository;
 import Entity.ProductDetail;
 
 
@@ -10,6 +10,7 @@ public class ProductCatalogPage extends Page{
     private String productNumber;
     Scanner input = new Scanner(System.in);
     private String productsAdded="";
+    List<ProductDetail> productDetails;
 
     public ProductCatalogPage(){
         catalogNumber = "";
@@ -26,7 +27,6 @@ public class ProductCatalogPage extends Page{
         System.out.println("Select a product catalog by typing the serial number.");
         System.out.print("Your choice: ");
         catalogNumber = input.nextLine();
-            
         System.out.println();
         displayProducts(catalogNumber);
         selectProducts();
@@ -43,12 +43,13 @@ public class ProductCatalogPage extends Page{
     }
 
     public void displayProducts(String catalogNumber) {
-        ProductFetcher productFetcher = new ProductFetcher();
-        List<ProductDetail> productDetails = productFetcher.fetchData(catalogNumber);
+        ProductRepository productFetcher = new ProductRepository();
+        productDetails = productFetcher.fetchData(catalogNumber);
         System.out.println(String.format("Available Products for catalog number %s : \n",catalogNumber ));
                 productDetails.forEach(productDetail -> {
-                    System.out.println("Product name: " + productDetail.getId() +
+                    System.out.println("Product ID: " + productDetail.getId() +
                             ", Product name: " + productDetail.getName() +
+                            ", Product quantity: " + productDetail.getQuantity() +
                             ", Product description: " + productDetail.getDescription() +
                             ", Price: " + productDetail.getPrice());
 
@@ -57,16 +58,14 @@ public class ProductCatalogPage extends Page{
 
     public void selectProducts() {
         System.out.println();
-        System.out.println("Enter the ID of the product to order or enter X to go back to a different category.");
+        System.out.println("Enter the ID of the product to order or enter 0 to go back to a different category.");
         System.out.print("Your choice: ");
-        String productName = input.nextLine();
-        if(productName.equals("x") || productName.equals("X")){
+        int productID = input.nextInt();
+        input.nextLine();
+        if(productID == 0){
             displayCatalogList();
         } else {
-            System.out.println("Enter the quantity of " +productName+ " you would like to order");
-            System.out.print("Your choice: ");
-            String quantity = input.nextLine();
-            productsAdded += productName+":"+quantity+";";
+            requestQuantity(productID - 1);
             displayNeedMoreProducts();
         }
     }
@@ -96,6 +95,23 @@ public class ProductCatalogPage extends Page{
             selectProducts();
         } else {
             displayCheckoutQuestion();
+        }
+    }
+
+    public void requestQuantity(int productID) {
+        int existingQuantity = (int)productDetails.get(productID).quantity;
+        String productName = productDetails.get(productID).name;
+        System.out.println();
+        System.out.println("Enter the quantity of " +productName+ " you would like to order");
+        System.out.print("Your choice: ");
+        int quantity = input.nextInt();
+        input.nextLine();
+        if (existingQuantity > quantity) {
+            productsAdded += productID+":"+quantity+";";
+        } else {
+            System.out.println();
+            System.out.println("Current available stock for this medicines is only "+existingQuantity);
+            requestQuantity(productID);
         }
     }
 

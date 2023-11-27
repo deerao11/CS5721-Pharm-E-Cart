@@ -3,9 +3,9 @@ package Entity;
 
 public class ProductDetail{
     private String id;
-    private String name;
+    public String name;
     private String product_description;
-    private double quantity;
+    public double quantity;
     private double price;
     private int category_id;
     public ProductDetail(){}

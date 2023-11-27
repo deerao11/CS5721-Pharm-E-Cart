@@ -13,7 +13,7 @@ import java.net.http.HttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class ProductFetcher {
+public class ProductRepository {
     public List<ProductDetail> fetchData(String catalogNumber) {
         List<ProductDetail> productDetails =new ArrayList<>();
         try {
@@ -44,7 +44,9 @@ public class ProductFetcher {
                     int category = jsonObject.getInt("category_id");
 
                     ProductDetail product = new ProductDetail(productId, productName,productDescription,quantity,price,category);
-                    productDetails.add(product);
+                    if (product.quantity > 0) {
+                        productDetails.add(product);
+                    }
                 }
                 return productDetails;
                 
