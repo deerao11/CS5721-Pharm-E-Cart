@@ -1,4 +1,5 @@
 // Concrete State classes
+package Control;
 class OrderProcessed implements OrderState {
     @Override
     public void processOrder(Order order) {

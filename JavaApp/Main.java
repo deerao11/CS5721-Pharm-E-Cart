@@ -12,13 +12,15 @@ public class Main {
         Scanner input = new Scanner(System.in);
         String confirmMsg = input.nextLine();
 
+         
+
+
         //Register
         if(confirmMsg.equalsIgnoreCase("R") ){
             RegisterPage registerPage = new RegisterPage();
             registerPage.start();
             registered = registerPage.register();
         }
-
 
         // Login
         if(confirmMsg.equals("L") || confirmMsg.equals("l") || registered == true){

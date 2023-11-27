@@ -1,6 +1,7 @@
+package Control;
 class Order {
     // Context class
-    private OrderState state;
+    public OrderState state;
 
     public Order() {
         this.state = new OrderProcessed();

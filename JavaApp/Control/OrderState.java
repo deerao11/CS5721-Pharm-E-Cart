@@ -1,4 +1,5 @@
 // State interface
+package Control;
 public interface OrderState {
     void processOrder(Order order);
 

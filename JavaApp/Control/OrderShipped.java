@@ -1,3 +1,4 @@
+package Control;
 class OrderShipped implements OrderState {
     @Override
     public void processOrder(Order order) {
