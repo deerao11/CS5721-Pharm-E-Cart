@@ -8,6 +8,9 @@ import java.net.http.HttpHeaders;
 import java.nio.charset.StandardCharsets;
 import Boundary.MainPage;
 import Boundary.Base64EncodeConversion;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import Entity.CustomerDetail;
 
 
 public class UserAuthenticationControl {
@@ -20,6 +23,7 @@ public class UserAuthenticationControl {
     private String eircode;
     private String email;
     public String baseURL = "https://falconer2-71714182580c.herokuapp.com/";
+    public CustomerDetail custDetail;
 
     public UserAuthenticationControl(String userId, String password){
         this.userId = userId;
@@ -38,7 +42,7 @@ public class UserAuthenticationControl {
     }
 
         
-    public boolean authenticate() {
+    public CustomerDetail authenticate() {
         try {
             var uri = URI.create(baseURL+"login");
             String jsonData = "{\"username\":\""+userId+"\",\"password\":\""+password+"\"}";
@@ -52,15 +56,22 @@ public class UserAuthenticationControl {
             HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.statusCode());
             System.out.println(response.body());
-            String jsonString = String.valueOf(response.body());
-            if (response.statusCode() == 200 && !jsonString.contains("error"))
-            return true;
+            JSONObject jsonObject = new JSONObject(response.body().toString());
+            if (response.statusCode() == 200 && !jsonObject.has("error")) {
+                int customerId = jsonObject.getInt("id");
+                String firstName = jsonObject.getString("first_name");
+                String lastName = jsonObject.getString("last_name");
+                String email = jsonObject.getString("email");
+                String role = jsonObject.getString("role");
+                custDetail = new CustomerDetail(customerId, firstName, lastName, email, role);
+                return custDetail;
+            }
             else
-            return false;
+            return null;
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public boolean register() {

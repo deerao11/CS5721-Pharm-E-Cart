@@ -2,12 +2,12 @@ package Entity;
 
 
 public class ProductDetail{
-    private String id;
+    public String id;
     public String name;
-    private String product_description;
+    public String product_description;
     public double quantity;
-    private double price;
-    private int category_id;
+    public double price;
+    public int category_id;
     public ProductDetail(){}
 
     public ProductDetail(String product_id, String product_name, String product_description, double quantity,double price,int category_id){
