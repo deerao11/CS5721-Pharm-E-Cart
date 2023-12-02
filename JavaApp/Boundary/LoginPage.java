@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.io.Console;
 import Control.UserAuthenticationControl;
 import Boundary.Page;
+import Entity.CustomerDetail;
 
 public class LoginPage extends Page {
     private String userId;
@@ -29,7 +30,7 @@ public class LoginPage extends Page {
         System.out.println();
     }
 
-    public boolean login(){
+    public CustomerDetail login(){
 
         displayLoginForm();
 
@@ -37,11 +38,13 @@ public class LoginPage extends Page {
             userId, password
         );
 
-        if(!(userAuthenticationControl.authenticate())){
+        CustomerDetail cd = userAuthenticationControl.authenticate();
+        if( cd == null){
             loginFail();
-            return false;
+            return null;
+        } else {
+            return cd;
         }
-        return true;
     }
 
     public void loginFail(){
