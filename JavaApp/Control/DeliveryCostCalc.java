@@ -1,2 +1,3 @@
-package Control;public class DeliveryCostCalc {
+package Control;
+public class DeliveryCostCalc {
 }
