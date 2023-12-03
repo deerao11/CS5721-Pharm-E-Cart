@@ -1,7 +1,9 @@
+import java.time.LocalTime;
 import java.util.Scanner;
 import Boundary.LoginPage;
 import Boundary.RegisterPage;
 import Boundary.ProductCatalogPage;
+import Control.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,10 +34,15 @@ public class Main {
                 ProductCatalogPage productCatalogPage = new ProductCatalogPage();
                 productCatalogPage.start();
                 productCatalogPage.displayCatalogList();
+
+
+
             }
 
 
 
         }
     }
+
+
 }
