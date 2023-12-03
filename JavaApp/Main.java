@@ -1,8 +1,9 @@
-import java.time.LocalTime;
-import java.util.Scanner;
+import java.util.*;
 import Boundary.LoginPage;
 import Boundary.RegisterPage;
 import Boundary.ProductCatalogPage;
+import Entity.CustomerDetail;
+import Entity.CartWrapper;
 import Control.*;
 
 public class Main {
@@ -26,23 +27,20 @@ public class Main {
         if(confirmMsg.equals("L") || confirmMsg.equals("l") || registered == true){
             LoginPage loginPage = new LoginPage();
             loginPage.start();
-            boolean loggedIn = loginPage.login();
+            CustomerDetail cd = loginPage.login();
+            boolean loggedIn = cd == null ? false : true;
             if (loggedIn) {
                 System.out.println("LOGGED IN SUCCESSFULLY");
 
                 // Product-Catalog
                 ProductCatalogPage productCatalogPage = new ProductCatalogPage();
                 productCatalogPage.start();
-                productCatalogPage.displayCatalogList();
-
-
-
+                List<CartWrapper> selectedProducts = new ArrayList<>();
+                productCatalogPage.displayCatalogList(cd, selectedProducts);
             }
 
 
 
         }
     }
-
-
 }
