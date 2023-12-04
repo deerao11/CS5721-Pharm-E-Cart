@@ -4,6 +4,7 @@ import Boundary.RegisterPage;
 import Boundary.ProductCatalogPage;
 import Entity.CustomerDetail;
 import Entity.CartWrapper;
+import Control.*;
 
 public class Main {
     public static void main(String[] args) {

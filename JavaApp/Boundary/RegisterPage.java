@@ -29,8 +29,10 @@ public class RegisterPage extends Page {
         System.out.print("Username: ");
         username = input.nextLine();
 
-        char[] hiddenPassword = System.console().readPassword("Password: ");
-        password = String.valueOf(hiddenPassword);
+//        char[] hiddenPassword = System.console().readPassword("Password: ");
+        System.out.print("\nPassword: ");
+//        password = String.valueOf(hiddenPassword);
+        password = input.nextLine();
 
         System.out.print("PPSN No: ");
         ppsn = input.nextLine();

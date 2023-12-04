@@ -1,3 +1,5 @@
+package Control;
+
 // Concrete decorator for Priority delivery
 public class PriorityDelivery extends DeliveryDecorator {
     public PriorityDelivery(Delivery decoratedDelivery) {
