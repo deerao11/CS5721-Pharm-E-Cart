@@ -14,9 +14,9 @@ public class DeliveryCostCalc {
 //                String orderId= "ABC-123";
 //                String deliveryMethod = "";
     //calculate delivery price
-    double totalCost=0;
+    double totalCost = 0;
 
-    public void display() {
+    public double getDeliveryCost() {
         Scanner input = new Scanner(System.in);
         System.out.println("\nAvailable delivery methods:\n1. Normal\n2. Priority\nPlease select your option : ");
         confirmMsg = input.nextLine();
@@ -35,18 +35,20 @@ public class DeliveryCostCalc {
         }
 
 
-        if(isNight()){
-            Delivery nightDelivery=new NightDelivery(new NormalDelivery());
+        if (isNight()) {
+            Delivery nightDelivery = new NightDelivery(new NormalDelivery());
             System.out.println("this is night");
-            totalCost+=nightDelivery.calculateDeliveryCost();
+            totalCost += nightDelivery.calculateDeliveryCost();
         }
-        System.out.printf("Total Cost: %.2f%n", totalCost);
+        System.out.printf("Delivery Cost: %.2f%n", totalCost);
+        return totalCost;
     }
 
 
-    public static boolean isNight(){
+    public static boolean isNight() {
         LocalTime now = LocalTime.now();
         LocalTime startTime = LocalTime.parse("19:00:00");
         LocalTime endTime = LocalTime.parse("23:59:59");
         return (now.isAfter(startTime) && now.isBefore(endTime));
     }
+}
