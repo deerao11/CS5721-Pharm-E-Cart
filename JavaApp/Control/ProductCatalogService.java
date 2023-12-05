@@ -8,6 +8,7 @@ import Entity.CustomerDetail;
 import Entity.CartWrapper;
 import Entity.OrderWrapper;
 
+
 public class ProductCatalogService {
     List<ProductDetail> productDetails;
     List<CartWrapper> selectedProducts = new ArrayList<>();

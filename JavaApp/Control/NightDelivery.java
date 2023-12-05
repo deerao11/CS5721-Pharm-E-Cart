@@ -1,3 +1,5 @@
+package Control;
+
 // Concrete decorator for Night delivery
 public class NightDelivery extends DeliveryDecorator {
     public NightDelivery(Delivery decoratedDelivery) {

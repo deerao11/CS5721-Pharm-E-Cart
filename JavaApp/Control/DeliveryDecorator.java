@@ -1,3 +1,5 @@
+package Control;
+
 // Decorator abstract class
 public abstract class DeliveryDecorator implements Delivery {
     protected Delivery decoratedDelivery;
