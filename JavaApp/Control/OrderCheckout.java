@@ -3,6 +3,9 @@ package Control;
 import java.util.*;
 import Entity.CartWrapper;
 import Entity.CustomerDetail;
+import Entity.OrderWrapper;
+import Entity.UpdateWrapper;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.net.URI;
@@ -17,12 +20,17 @@ public class OrderCheckout {
     DeliveryCostCalc deliveryCostCalc = new DeliveryCostCalc();
     public String baseURL = "https://falconer2-71714182580c.herokuapp.com/";
     String jsonData="[";
+    int customerID ;
 
-    public void checkout(List<CartWrapper> cw, CustomerDetail cd, String deliveryOptions) {
+    public List<OrderWrapper> checkout(List<CartWrapper> cw, CustomerDetail cd, String deliveryOptions) {
         double totalItemCost = 0,deliveryCost=0;
         Map<String, Integer> existingProducts = new HashMap<>();
         Map<String, Double> productPrice = new HashMap<>();
+        List<UpdateWrapper> updatewrap= new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+    	List<OrderWrapper> orderwrapper = new ArrayList<>();
         for(int i=0; i < cw.size(); i++) {
+            customerID=cw.get(i).custId;
             final String uniqId = cw.get(i).categoryId + "-" + cw.get(i).prodId+"-"+cw.get(i).getCustId();
             if (existingProducts.containsKey(uniqId)) {
                 int newQty = existingProducts.get(uniqId) + cw.get(i).getQuantity();
@@ -68,6 +76,10 @@ public class OrderCheckout {
                     }
                     System.out.println("Cart Total : "+totalItemCost);
                     System.out.println("\n--------------------------\nTotal Order Cost = "+(deliveryCost+totalItemCost));
+                    OrderWrapper ow  = new OrderWrapper(customerID, cartNum, deliveryOptions);
+                    orderwrapper.add(ow);
+                    Order oo = new Order();
+                    oo.OrderDetail(orderwrapper, cw);
                 }
                 else {
                     System.out.println("Error moving things into cart");
@@ -75,5 +87,6 @@ public class OrderCheckout {
             }catch (Exception e) {
                 e.printStackTrace();
             }
+        return orderwrapper;
     }
 }

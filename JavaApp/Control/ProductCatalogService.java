@@ -6,7 +6,7 @@ import Entity.ProductDetail;
 import Control.OrderCheckout;
 import Entity.CustomerDetail;
 import Entity.CartWrapper;
-
+import Entity.OrderWrapper;
 
 
 public class ProductCatalogService {
@@ -61,7 +61,7 @@ public class ProductCatalogService {
         if (checkout.equals("y") || checkout.equals("Y")) {
             System.out.println("Checking out");
             OrderCheckout oc = new OrderCheckout();
-            oc.checkout(selectedProducts, custDetail, deliveryOptions);                
+            List<OrderWrapper> ow = oc.checkout(selectedProducts, custDetail, deliveryOptions);                
         } else if (checkout.equals("n") || checkout.equals("N")){
             selectProducts(productDetails, custDetail, selectedProducts);
         } else {
@@ -83,7 +83,7 @@ public class ProductCatalogService {
             cw.prodId = productDetails.get(productID).id;
             cw.custId = custDetail.custId;
             cw.quantity = quantity;
-            cw.price = quantity * productDetails.get(productID).price;
+            cw.price = productDetails.get(productID).price;
             selectedProducts.add(cw);
         } else {
             System.out.println();

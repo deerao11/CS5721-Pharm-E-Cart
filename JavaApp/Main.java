@@ -6,6 +6,7 @@ import Entity.CustomerDetail;
 import Entity.CartWrapper;
 import Control.*;
 
+
 public class Main {
     public static void main(String[] args) {
 
@@ -37,7 +38,9 @@ public class Main {
                 productCatalogPage.start();
                 List<CartWrapper> selectedProducts = new ArrayList<>();
                 productCatalogPage.displayCatalogList(cd, selectedProducts);
-            }
+                
+                
+                }
 
 
 
