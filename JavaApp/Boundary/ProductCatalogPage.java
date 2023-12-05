@@ -15,7 +15,7 @@ public class ProductCatalogPage extends Page{
     private String productNumber;
     Scanner input = new Scanner(System.in);
     List<ProductDetail> productDetails;
-    public String deliveryOptions ="";
+    public String deliveryOptions ="Home Delivery and Store Pickup.";
 
     public ProductCatalogPage(){
         catalogNumber = "";
