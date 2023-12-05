@@ -64,8 +64,8 @@ public class Order {
 			}
 		}
 		 
-		UpdateOrder uo = new UpdateOrder();
-		String UpdtOrd = uo.updateOrder(orderStatus, status);
+		UpdateOrderCommand uo = new UpdateOrderCommand(new UpdateOrder(),orderStatus, status);
+		uo.execute();
 	}
 }
 

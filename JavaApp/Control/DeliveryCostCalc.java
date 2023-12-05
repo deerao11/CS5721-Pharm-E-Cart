@@ -27,6 +27,7 @@ public class DeliveryCostCalc {
                 DeliveryFactory normalFactory = new NormalDeliveryFactory();
                 Delivery normalDelivery = normalFactory.createDelivery();
                 totalCost += normalDelivery.calculateDeliveryCost();
+
                 break;
             case "2":
                 DeliveryFactory priorityFactory = new PriorityDeliveryFactory();
@@ -42,6 +43,7 @@ public class DeliveryCostCalc {
             Delivery nightDelivery = new NightDelivery(new NormalDelivery());
             System.out.println("this is night");
             totalCost += nightDelivery.calculateDeliveryCost();
+
         }
         System.out.printf("Delivery Cost: %.2f%n", totalCost);
         return totalCost;

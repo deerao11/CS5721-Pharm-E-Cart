@@ -1,2 +1,5 @@
-package Control;public interface Command {
+package Control;
+
+public interface Command {
+    void execute();
 }
