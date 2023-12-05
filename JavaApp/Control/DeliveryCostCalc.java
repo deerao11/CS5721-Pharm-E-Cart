@@ -1,4 +1,5 @@
 package Control;
+
 import java.time.LocalTime;
 import java.util.*;
 
@@ -51,6 +52,4 @@ public class DeliveryCostCalc {
         LocalTime endTime = LocalTime.parse("23:59:59");
         return (now.isAfter(startTime) && now.isBefore(endTime));
     }
-package Control;
-public class DeliveryCostCalc {
 }

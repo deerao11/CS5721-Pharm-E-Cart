@@ -83,7 +83,7 @@ public class ProductCatalogService {
             cw.prodId = productDetails.get(productID).id;
             cw.custId = custDetail.custId;
             cw.quantity = quantity;
-            cw.price = quantity * productDetails.get(productID).price;
+            cw.price = productDetails.get(productID).price;
             selectedProducts.add(cw);
         } else {
             System.out.println();
