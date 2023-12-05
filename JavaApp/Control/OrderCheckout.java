@@ -4,7 +4,7 @@ import java.util.*;
 import Entity.CartWrapper;
 import Entity.CustomerDetail;
 import Entity.OrderWrapper;
-import Entity.UpdateWrapper;
+import Entity.OrderUpdateWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +23,7 @@ public class OrderCheckout {
     int customerID ;
 
     public List<OrderWrapper> checkout(List<CartWrapper> cw, CustomerDetail cd, String deliveryOptions) {
-         List<UpdateWrapper> updatewrap= new ArrayList<>();
+         List<OrderUpdateWrapper> updatewrap= new ArrayList<>();
          Scanner input = new Scanner(System.in);
     	List<OrderWrapper> orderwrapper = new ArrayList<>();
         for(int i=0; i < cw.size(); i++) {
@@ -52,15 +52,11 @@ public class OrderCheckout {
                     JSONObject jsonObject = new JSONObject(response.body().toString());
                     String cartNum = jsonObject.getString("OrderNo");
                     System.out.println("Items have been checked out to the cart. Your order is eligible for "+deliveryOptions);
+                    System.out.println("");
                     OrderWrapper ow  = new OrderWrapper(customerID, cartNum, deliveryOptions);
-                 // UpdateWrapper uw=new UpdateWrapper(customerID,);
                     orderwrapper.add(ow);
                     Order oo = new Order();
-                    oo.OrderDetail(orderwrapper, cw);
-                    // orderwrapper.add(uw);
-                    //oo.updateState(;
-
-                    
+                    oo.OrderDetail(orderwrapper, cw);    
                 }
                 else
                 System.out.println("Error moving things into cart");

@@ -1,15 +1,15 @@
 package Entity;
 
-public class UpdateWrapper {
+public class OrderUpdateWrapper {
 	public String orderId;
 	public String orderTime;
 	public int custId;
 	
-	public UpdateWrapper() {
+	public OrderUpdateWrapper() {
 		
 	}
 	
-	public UpdateWrapper(String orderId, String orderTime,int custId) {
+	public OrderUpdateWrapper(String orderId, String orderTime,int custId) {
 		this.orderId = orderId;
 		this.orderTime = orderTime;
 		this.custId=custId;

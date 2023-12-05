@@ -7,16 +7,17 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
-import Entity.UpdateWrapper;
+import Entity.OrderUpdateWrapper;
 import Entity.OrderWrapper;
 import Control.Order;
 
 public class PlaceOrder {
 	public String baseURL = "https://falconer2-71714182580c.herokuapp.com/";
     public String jsonData;
-
-    public List<UpdateWrapper> placeOrder(List<OrderWrapper> ow) {
-    	List<UpdateWrapper> cancelwrapper = new ArrayList<>();
+    public String Delivery_type;
+    public List<OrderUpdateWrapper> placeOrder(List<OrderWrapper> ow) {
+    	List<OrderUpdateWrapper> updatewrapper = new ArrayList<>();
+        Delivery_type=ow.get(0).delType;
     	jsonData = "{ \"order_number\" : \""+ow.get(0).orderId+"\",\"delivery_type\": \""+ow.get(0).delType+"\", \"customer_id\":\""+ow.get(0).custId+"\"}";
         
         try {
@@ -36,16 +37,16 @@ public class PlaceOrder {
                     JSONObject jsonObject = new JSONObject(response.body().toString());
                     String orderId = jsonObject.getString("OrderNo");
                     String orderTime = jsonObject.getString("ordertime");
-                    UpdateWrapper cw = new UpdateWrapper(orderId, orderTime,ow.get(0).custId);
-                    cancelwrapper.add(cw);
+                    OrderUpdateWrapper cw = new OrderUpdateWrapper(orderId, orderTime,ow.get(0).custId);
+                    updatewrapper.add(cw);
                     Order od = new Order();
-                    od.updateOrder(cancelwrapper);
+                    od.updateOrder(updatewrapper,Delivery_type);
                 }
                 else
                 System.out.println("Error placing order.");
             }catch (Exception e) {
                 e.printStackTrace();
             }
-		return cancelwrapper;
+		return updatewrapper;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import Entity.UpdateWrapper;
+import Entity.OrderUpdateWrapper;
 import Entity.OrderWrapper;
 
 public class UpdateOrder {
@@ -17,12 +17,13 @@ public class UpdateOrder {
     public String jsonData;
     public String orderNo;
 
-    public String updateOrder(List<UpdateWrapper> cw, String updateStatus) {
+    public String updateOrder(List<OrderUpdateWrapper> cw, String updateStatus) {
     	jsonData = "{\"customer_id\":\""+cw.get(0).custId+"\",\"order_number\":\""+cw.get(0).orderId+"\",\"order_status\":\""+updateStatus+"\"}";
         
         
         try {
             System.out.println(jsonData);
+            System.out.println(" ");
                 var uri = URI.create(baseURL+"updateOderStatus");
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest
@@ -37,7 +38,9 @@ public class UpdateOrder {
                 if (response.statusCode() == 200) {
                     JSONObject jsonObject = new JSONObject(response.body().toString());
                     System.out.println(jsonObject.get("msg"));
+                    System.out.println(" ");
                     orderNo = jsonObject.getString("OrderNo");
+
                 }
                 else
                 System.out.println("Error updating status.");
