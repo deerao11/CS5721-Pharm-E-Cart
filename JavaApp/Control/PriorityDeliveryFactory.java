@@ -1,8 +1,8 @@
 package Control;
 
-public class NormalDeliveryFactory implements DeliveryFactory {
+public class PriorityDeliveryFactory implements DeliveryFactory {
     @Override
     public Delivery createDelivery() {
-        return new NormalDelivery();
+        return new PriorityDelivery(new NormalDelivery());
     }
 }

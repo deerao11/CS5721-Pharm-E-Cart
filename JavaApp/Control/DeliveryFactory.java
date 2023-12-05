@@ -1,2 +1,5 @@
-package Control;public interface DeliveryFactory {
+package Control;
+
+public interface DeliveryFactory {
+    Delivery createDelivery();
 }
