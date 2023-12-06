@@ -8,6 +8,8 @@ import Entity.CustomerDetail;
 import Entity.CartWrapper;
 import Control.OrderController;
 import Entity.OrderDetailWrapper;
+import Control.PharmacyController;
+import Entity.OutOfStockProductWrapper;
 
 
 public class ProductCatalogPage extends Page{
@@ -68,7 +70,32 @@ public class ProductCatalogPage extends Page{
             catalogNumber = input.nextLine();
             switch(catalogNumber) {
                 case "1":
-                    System.out.println("You have selected to update inventory");
+                    PharmacyController pc = new PharmacyController();
+                    List<OutOfStockProductWrapper> oosProdList = pc.showInventoryOutOfStock();
+                    if(oosProdList.size() > 0){
+                        System.out.println();
+                        System.out.println("These are the products that have been requested from the vendor.");
+                        drawDivider("*");
+                        oosProdList.forEach(oosProd -> {
+                            System.out.println("Product Name: " + oosProd.getProductName());
+                            System.out.println("Quantity Requested: " + oosProd.getQuantity());
+                            System.out.println("Product price: " + oosProd.getPrice());
+                            System.out.println("Requested Time: " + oosProd.getDateOutOfStock());
+                            System.out.println("Order Status: " + oosProd.getStatus());
+                            System.out.println();
+
+                        });
+                        System.out.println("Select Y if you would like to confirm receival of these products or N to exit");
+                        System.out.print("Your choice: ");
+                        String confirmation = input.nextLine();
+                        System.out.println();
+                        if(confirmation.equalsIgnoreCase("y") ){
+                            pc.vendorUpdateInventory(custDetail);
+                        }
+                    } else {
+                        System.out.println("All products in stock! No requests raised so far.");
+                    }
+                    
                     break;
                 case "2":
                     System.out.println("You have selected to trigger a notification for a packed order.");
