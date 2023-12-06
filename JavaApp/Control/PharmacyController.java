@@ -76,7 +76,7 @@ public class PharmacyController implements IObserver {
 
     public void vendorUpdateInventory(CustomerDetail custDetail) {
         try {
-            var uri = URI.create("https://falconer2-71714182580c.herokuapp.com/updateInventoryPharmacists");
+            var uri = URI.create(baseURL+"updateInventoryPharmacists");
             String jsonData = "{\"pharmacist_id\":\""+custDetail.custId+"\"}";
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest
