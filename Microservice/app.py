@@ -339,7 +339,6 @@ class UpdateOrderClass:
 			cur = conn.cursor()
 			cur.execute(Uqry)
 			conn.commit()
-
 			create_email_and_send(data['customer_id'],data['order_status'],data['order_number'])
 			result = {"msg":"order status updated sucessfully","OrderNo":data['order_number'],'updatetime':now.strftime("%Y-%m-%d %H:%M:%S")}
 			resp.status = falcon.HTTP_200
