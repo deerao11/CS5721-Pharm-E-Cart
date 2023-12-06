@@ -17,6 +17,7 @@ public class PlaceOrder {
 
     public List<UpdateWrapper> placeOrder(List<OrderWrapper> ow) {
     	List<UpdateWrapper> cancelwrapper = new ArrayList<>();
+       String Delivery_type= ow.get(0).delType;
     	jsonData = "{ \"order_number\" : \""+ow.get(0).orderId+"\",\"delivery_type\": \""+ow.get(0).delType+"\", \"customer_id\":\""+ow.get(0).custId+"\"}";
         
         try {
@@ -38,8 +39,10 @@ public class PlaceOrder {
                     String orderTime = jsonObject.getString("ordertime");
                     UpdateWrapper cw = new UpdateWrapper(orderId, orderTime,ow.get(0).custId);
                     cancelwrapper.add(cw);
-                    Order od = new Order();
-                    od.updateOrder(cancelwrapper);
+                    // Order od = new Order();
+                    // od.updateOrder(cancelwrapper);
+                     OrderContext orderContext = new OrderContext();
+                    orderContext.updateOrder(cancelwrapper, Delivery_type);
                 }
                 else
                 System.out.println("Error placing order.");

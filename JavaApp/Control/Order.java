@@ -28,44 +28,33 @@ public class Order {
 			
 		}
 	}
-	public void displayCartDetails(List<CartWrapper> cw) {
-        //    System.out.println("products in cart :" );
-		// for(int i=0; i < cw.size(); i++) {
-        //     jsonData += "{\"category_id\":\""+cw.get(i).categoryId+"\",\"product_id\":\""+cw.get(i).prodId+"\",\"customer_id\":\""+cw.get(i).custId+"\",\"quantity\":\""+cw.get(i).quantity+"\",\"price\":\""+cw.get(i).price+"\"}";
-        //     if (i < cw.size() - 1) {
-        //         jsonData +=  ",";
-        //     } else {
-        //         jsonData +=  "]";
-        //     }
-        // }
-	}
 
-    public void updateOrder(List<UpdateWrapper> orderStatus) {
-		String status = "";
-		System.out.println("Enter Y to ship order or N to cancel order");
-		String sub = input.nextLine();
-		if(sub.equals("Y")||sub.equals("y")) {
-			status = "Confirmed";
-			System.out.println("shipped successfully");
-		}else if(sub.equals("n")||sub.equals("N")) {
-			String time = orderStatus.get(0).orderTime;
-			time = time.split(" ")[1];
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-			LocalTime orderTime = LocalTime.parse(time, formatter);
-			LocalTime newTime = orderTime.plusMinutes(2);
-			LocalTime currentTime = LocalTime.now();
-			if(currentTime.isBefore(newTime)) {
-			status = "Cancelled";
-			}else {
-				status = "Confirmed";
-				System.out.println("You took more than 2 minutes to cancel the order");
-				System.out.println("Order cannnot be cancelled");
-				System.out.println("Order automatically moved to shipped state");
-			}
-		}
+    // public void updateOrder(List<UpdateWrapper> orderStatus) {
+	// 	String status = "";
+	// 	System.out.println("Enter Y to ship order or N to cancel order");
+	// 	String sub = input.nextLine();
+	// 	if(sub.equals("Y")||sub.equals("y")) {
+	// 		status = "Confirmed";
+	// 		System.out.println("shipped successfully");
+	// 	}else if(sub.equals("n")||sub.equals("N")) {
+	// 		String time = orderStatus.get(0).orderTime;
+	// 		time = time.split(" ")[1];
+	// 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+	// 		LocalTime orderTime = LocalTime.parse(time, formatter);
+	// 		LocalTime newTime = orderTime.plusMinutes(2);
+	// 		LocalTime currentTime = LocalTime.now();
+	// 		if(currentTime.isBefore(newTime)) {
+	// 		status = "Cancelled";
+	// 		}else {
+	// 			status = "Confirmed";
+	// 			System.out.println("You took more than 2 minutes to cancel the order");
+	// 			System.out.println("Order cannnot be cancelled");
+	// 			System.out.println("Order automatically moved to shipped state");
+	// 		}
+	// 	}
 		 
-		UpdateOrderCommand uo = new UpdateOrderCommand(new UpdateOrder(),orderStatus, status);
-		uo.execute();
-	}
+	// 	// UpdateOrderCommand uo = new UpdateOrderCommand(new UpdateOrder(),orderStatus, status);
+	// 	// uo.execute();
+	// }
 }
 
