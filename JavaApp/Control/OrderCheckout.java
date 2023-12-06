@@ -83,6 +83,7 @@ public class OrderCheckout {
                     orderwrapper.add(ow);
                     Order oo = new Order();
                     oo.OrderDetail(orderwrapper, cw);
+                    
                 }
                 else {
                     System.out.println("Error moving things into cart");
