@@ -24,6 +24,8 @@ public class OrderCheckout {
 
     public List<OrderWrapper> checkout(List<CartWrapper> cw, CustomerDetail cd, String deliveryOptions) {
         double totalItemCost = 0,deliveryCost=0;
+        // this is for the redundant order qty prob.
+
         Map<String, Integer> existingProducts = new HashMap<>();
         Map<String, Double> productPrice = new HashMap<>();
         List<UpdateWrapper> updatewrap= new ArrayList<>();
@@ -71,6 +73,7 @@ public class OrderCheckout {
                     JSONObject jsonObject = new JSONObject(response.body().toString());
                     String cartNum = jsonObject.getString("OrderNo");
                     System.out.println("Items have been checked out to the cart. Your order is eligible for " + deliveryOptions);
+                    // This is the delivery decorator. but we might wanna implement the factory alongwith it.
                     if (!deliveryOptions.equalsIgnoreCase("Store pickup only.")) {
                         deliveryCost = deliveryCostCalc.getDeliveryCost();
                     }

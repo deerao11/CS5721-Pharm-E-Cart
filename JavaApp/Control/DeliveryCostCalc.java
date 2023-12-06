@@ -24,11 +24,14 @@ public class DeliveryCostCalc {
 
         switch (confirmMsg) {
             case "1":
-                Delivery normalDelivery = new NormalDelivery();
+                DeliveryFactory normalFactory = new NormalDeliveryFactory();
+                Delivery normalDelivery = normalFactory.createDelivery();
                 totalCost += normalDelivery.calculateDeliveryCost();
+
                 break;
             case "2":
-                Delivery priorityDelivery = new PriorityDelivery(new NormalDelivery());
+                DeliveryFactory priorityFactory = new PriorityDeliveryFactory();
+                Delivery priorityDelivery = priorityFactory.createDelivery();
                 totalCost += priorityDelivery.calculateDeliveryCost();
                 break;
             default:
@@ -40,6 +43,7 @@ public class DeliveryCostCalc {
             Delivery nightDelivery = new NightDelivery(new NormalDelivery());
             System.out.println("this is night");
             totalCost += nightDelivery.calculateDeliveryCost();
+
         }
         System.out.printf("Delivery Cost: %.2f%n", totalCost);
         return totalCost;
@@ -48,8 +52,12 @@ public class DeliveryCostCalc {
 
     public static boolean isNight() {
         LocalTime now = LocalTime.now();
-        LocalTime startTime = LocalTime.parse("19:00:00");
+        LocalTime startTime = LocalTime.parse("18:00:00");
         LocalTime endTime = LocalTime.parse("23:59:59");
         return (now.isAfter(startTime) && now.isBefore(endTime));
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin
