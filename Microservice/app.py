@@ -368,6 +368,19 @@ class getCustomerOrdersClass:
 			result = {"error":"required params missing"}
 			resp.status = falcon.HTTP_400
 			resp.body = json.dumps(result)
+			
+class getInventoryProductsClass:
+	def on_post(self,req,resp):
+		conn = conn_db()
+		sQry = "SELECT product_list.product_name,product_list.product_description,inventory_products.quantity,inventory_products.price,inventory_products.datetime,inventory_products.order_status FROM `products`.inventory_products INNER JOIN `products`.product_list ON inventory_products.product_id=product_list.product_id where inventory_products.order_status = 'PO Raised'"	
+		cur = conn.cursor()
+		cur.execute(sQry)
+		result = cur.fetchall()
+		result_list = []
+		for row in result:
+			result_list.append(row)
+		resp.status = falcon.HTTP_200
+		resp.body = json.dumps(result)
 
 
 api = falcon.API()
@@ -386,6 +399,8 @@ api.add_route("/placeOrder", PlaceOrderClass())
 api.add_route("/updateOderStatus", UpdateOrderClass())
 
 api.add_route("/getCustomerOrders", getCustomerOrdersClass())
+
+api.add_route('/getInventoryProducts', getInventoryProductsClass())
 
 # if __name__ == '__main__':
 #     with make_server('', 8000, api) as httpd:
