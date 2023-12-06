@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "829b0ab7-5e76-4297-a77d-350e1a2ac7cb",
+		"name": "CS5721_Pharmacy_E_Cart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8766818"
+	},
+	"item": [
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/addtocart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"category_id\":1,\n        \"product_id\":1,\n        \"customer_id\":1,\n        \"quantity\":2,\n        \"price\":110.10\n    },\n    {\n        \"category_id\":1,\n        \"product_id\":2,\n        \"customer_id\":1,\n        \"quantity\":2,\n        \"price\":210.10\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/addtocart",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"addtocart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"roxy\",\n    \"password\":\"roxy@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/login",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\":\"Suhas\",\n    \"last_name\":\"Mohan Kumar\",\n    \"username\":\"roxy1\",\n    \"password\":\"cm94eUAxMjNyb3h5QDEyMw==\",\n    \"PPSN\":\"123456\",\n    \"address\":\"India\",\n    \"eir_code\":\"V94 PK66\",\n    \"email\":\"roxy1@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/register",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/get-products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"category_id\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/get-products",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"get-products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/search-products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"category_id\":1,\n    \"search_key\":\"cro\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/search-products",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"search-products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/placeOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_number\":\"E0804D6C19\",\n    \"delivery_type\":\"Priority Delivery\",\n    \"customer_id\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/placeOrder",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"placeOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/updateOderStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer_id\":1,\n    \"order_number\":\"E0804D6C19\",\n    \"order_status\":\"Delivered\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/updateOderStatus",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"updateOderStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/getCustomerOrders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/getCustomerOrders",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"getCustomerOrders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/getInventoryProducts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/getInventoryProducts",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"getInventoryProducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/updateInventory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_number\":\"1B552028E8\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/updateInventory",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"updateInventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://falconer2-71714182580c.herokuapp.com/updateInventoryPharmacists",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pharmacist_id\":14\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://falconer2-71714182580c.herokuapp.com/updateInventoryPharmacists",
+					"protocol": "https",
+					"host": [
+						"falconer2-71714182580c",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"updateInventoryPharmacists"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

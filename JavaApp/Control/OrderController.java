@@ -24,11 +24,9 @@ public class OrderController implements IObservable {
     }
 
     public void notifyObservers(String orderId) {
-        System.out.println("In notify observers");
         observerList.forEach(observer -> observer.update(orderId));
     }
 
-  
     public List<OrderDetailWrapper> getPastOrders(int customerId) {
         try {
             var uri = URI.create("https://falconer2-71714182580c.herokuapp.com/getCustomerOrders");
@@ -53,9 +51,10 @@ public class OrderController implements IObservable {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String currentOrderNum = jsonObject.getString("order_number");
                     OrderDetailWrapper odw = new OrderDetailWrapper();
+                    int currentsize = orderSummary.size();
                     if (orderNum.equals(currentOrderNum)) {
                         price += jsonObject.getInt("price");
-                        OrderDetailWrapper updatedInstance = orderSummary.get(i-1);
+                        OrderDetailWrapper updatedInstance = orderSummary.get(currentsize-1);
                         updatedInstance.setPrice(price);
                     }
                     else {
@@ -77,5 +76,4 @@ public class OrderController implements IObservable {
         }
         return null;
     }
-
 }
