@@ -37,11 +37,13 @@ public class UpdateOrder {
                 if (response.statusCode() == 200) {
                     JSONObject jsonObject = new JSONObject(response.body().toString());
                     System.out.println(jsonObject.get("msg"));
-                    orderNo = jsonObject.getString("OrderNo");
-                    OrderController oc = new OrderController();
-                    IObserver observer1 = new PharmacyController();
-                    oc.addObs(observer1);
-                    oc.notifyObservers(orderNo);
+                    if (updateStatus.equals("Cancelled")) {
+                        orderNo = jsonObject.getString("OrderNo");
+                        OrderController oc = new OrderController();
+                        IObserver observer1 = new PharmacyController();
+                        oc.addObs(observer1);
+                        oc.notifyObservers(orderNo);
+                    }
                 }
                 else
                 System.out.println("Error updating status.");
