@@ -24,35 +24,8 @@ public class OrderController implements IObservable {
     }
 
     public void notifyObservers(String orderId) {
+        System.out.println("In notify observers");
         observerList.forEach(observer -> observer.update(orderId));
-    }
-
-    public String getOrderStatus(String orderId) {
-        try {
-            var uri = URI.create("https://falconer2-71714182580c.herokuapp.com/getOrderStatus");
-            String jsonData = "{\"orderId\":\""+orderId+"\"}";
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest
-                    .newBuilder()
-                    .uri(uri)
-                    .header("accept", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-                    .build();
-            HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.statusCode());
-            System.out.println(response.body());
-            if (response.statusCode() == 200) {
-                JSONObject jsonObject = new JSONObject(response.body());
-                String status = jsonObject.getString("status");
-                if (status == "Cancelled")
-                notifyObservers(orderId);
-            }
-            else
-            return "Error Occured";
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Please try again";
     }
 
     public List<OrderDetailWrapper> getPastOrders(int customerId) {
@@ -79,9 +52,10 @@ public class OrderController implements IObservable {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String currentOrderNum = jsonObject.getString("order_number");
                     OrderDetailWrapper odw = new OrderDetailWrapper();
+                    int currentsize = orderSummary.size();
                     if (orderNum.equals(currentOrderNum)) {
                         price += jsonObject.getInt("price");
-                        OrderDetailWrapper updatedInstance = orderSummary.get(i-1);
+                        OrderDetailWrapper updatedInstance = orderSummary.get(currentsize-1);
                         updatedInstance.setPrice(price);
                     }
                     else {
