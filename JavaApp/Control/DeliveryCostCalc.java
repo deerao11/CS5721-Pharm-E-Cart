@@ -56,4 +56,8 @@ public class DeliveryCostCalc {
         LocalTime endTime = LocalTime.parse("23:59:59");
         return (now.isAfter(startTime) && now.isBefore(endTime));
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin

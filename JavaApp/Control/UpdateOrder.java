@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import Entity.UpdateWrapper;
 import Entity.OrderWrapper;
+import Control.OrderController;
 
 public class UpdateOrder {
 	public String baseURL = "https://falconer2-71714182580c.herokuapp.com/";
@@ -33,11 +34,14 @@ public class UpdateOrder {
                         .build();
                 HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
                 System.out.println(response.statusCode());
-                System.out.println(response.body());
                 if (response.statusCode() == 200) {
                     JSONObject jsonObject = new JSONObject(response.body().toString());
                     System.out.println(jsonObject.get("msg"));
                     orderNo = jsonObject.getString("OrderNo");
+                    OrderController oc = new OrderController();
+                    IObserver observer1 = new PharmacyController();
+                    oc.addObs(observer1);
+                    oc.notifyObservers(orderNo);
                 }
                 else
                 System.out.println("Error updating status.");

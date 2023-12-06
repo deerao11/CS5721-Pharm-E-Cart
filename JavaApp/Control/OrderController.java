@@ -24,13 +24,14 @@ public class OrderController implements IObservable {
     }
 
     public void notifyObservers(String orderId) {
+        System.out.println("In notify observers");
         observerList.forEach(observer -> observer.update(orderId));
     }
 
-    public String getOrderStatus(String orderId) {
+    public List<OrderDetailWrapper> getPastOrders(int customerId) {
         try {
-            var uri = URI.create("https://falconer2-71714182580c.herokuapp.com/getOrderStatus");
-            String jsonData = "{\"orderId\":\""+orderId+"\"}";
+            var uri = URI.create("https://falconer2-71714182580c.herokuapp.com/getCustomerOrders");
+            String jsonData = "{\"customer_id\":\""+customerId+"\"}";
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest
                     .newBuilder()
@@ -39,20 +40,42 @@ public class OrderController implements IObservable {
                     .POST(HttpRequest.BodyPublishers.ofString(jsonData))
                     .build();
             HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.statusCode());
-            System.out.println(response.body());
             if (response.statusCode() == 200) {
-                JSONObject jsonObject = new JSONObject(response.body());
-                String status = jsonObject.getString("status");
-                if (status == "Cancelled")
-                notifyObservers(orderId);
+                JSONArray jsonArray = new JSONArray(response.body().toString());
+                int price=0;
+                String orderNum="";
+                String orderTime;
+                String delType;
+                String orderStatus;
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String currentOrderNum = jsonObject.getString("order_number");
+                    OrderDetailWrapper odw = new OrderDetailWrapper();
+                    int currentsize = orderSummary.size();
+                    if (orderNum.equals(currentOrderNum)) {
+                        price += jsonObject.getInt("price");
+                        OrderDetailWrapper updatedInstance = orderSummary.get(currentsize-1);
+                        updatedInstance.setPrice(price);
+                    }
+                    else {
+                        price = jsonObject.getInt("price");
+                        orderNum = currentOrderNum;
+                        orderTime = jsonObject.getString("datetime");
+                        delType = jsonObject.getString("delivery_type");
+                        orderStatus = jsonObject.getString("order_status");
+                        odw = new OrderDetailWrapper(price, orderNum, orderTime, delType, orderStatus);
+                        orderSummary.add(odw);
+                    }
+                }
+                return orderSummary;
             }
             else
-            return "Error Occured";
+            return null;
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return "Please try again";
+        return null;
     }
 
     public List<OrderDetailWrapper> getPastOrders(int customerId) {
