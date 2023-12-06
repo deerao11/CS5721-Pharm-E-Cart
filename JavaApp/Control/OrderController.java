@@ -24,7 +24,6 @@ public class OrderController implements IObservable {
     }
 
     public void notifyObservers(String orderId) {
-        System.out.println("In notify observers");
         observerList.forEach(observer -> observer.update(orderId));
     }
 
