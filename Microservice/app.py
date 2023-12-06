@@ -351,15 +351,11 @@ class UpdateOrderClass:
 
 
 class getCustomerOrdersClass:
-	def on_post(self, req, resp):
+	def on_post(self,req,resp):
 		conn = conn_db()
 		data = json.loads(req.stream.read())
-		if "customer_id" in data:
-			sQry = (
-				"select * from `orders`.order_details where customer_id = {0}".format(
-					int(data["customer_id"])
-				)
-			)
+		if 'customer_id' in data:
+			sQry = "SELECT product_list.product_name,product_list.product_description,order_details.quantity,order_details.price,order_details.datetime,order_details.delivery_type,order_details.order_status,order_details.order_number FROM `orders`.order_details INNER JOIN `products`.product_list ON order_details.product_id=product_list.product_id where order_details.customer_id = {0} order by order_number".format(int(data['customer_id']))
 			cur = conn.cursor()
 			cur.execute(sQry)
 			result = cur.fetchall()
@@ -370,7 +366,7 @@ class getCustomerOrdersClass:
 			resp.body = json.dumps(result)
 
 		else:
-			result = {"error": "required params missing"}
+			result = {"error":"required params missing"}
 			resp.status = falcon.HTTP_400
 			resp.body = json.dumps(result)
 
