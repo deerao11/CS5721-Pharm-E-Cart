@@ -17,6 +17,7 @@ public class ProductCatalogPage extends Page{
     private String productNumber;
     Scanner input = new Scanner(System.in);
     List<ProductDetail> productDetails;
+    public static final String choiceQuestion = "Your Choice: ";
     public String deliveryOptions ="Home Delivery and Store Pickup.";
 
     public ProductCatalogPage(){
@@ -33,7 +34,7 @@ public class ProductCatalogPage extends Page{
         System.out.println("Customer role is "+custDetail.role);
         if (custDetail.role.equals("Customer")) {
             System.out.println("Select a product catalog by typing the serial number.");
-            System.out.print("Your choice: ");
+            System.out.print(choiceQuestion);
             catalogNumber = input.nextLine();
             System.out.println();
             switch(catalogNumber) {
@@ -66,7 +67,7 @@ public class ProductCatalogPage extends Page{
             }
         } else {
             System.out.println("Select your choice from the menu.");
-            System.out.print("Your choice: ");
+            System.out.print(choiceQuestion);
             catalogNumber = input.nextLine();
             switch(catalogNumber) {
                 case "1":
@@ -86,7 +87,7 @@ public class ProductCatalogPage extends Page{
 
                         });
                         System.out.println("Select Y if you would like to confirm receival of these products or N to exit");
-                        System.out.print("Your choice: ");
+                        System.out.print(choiceQuestion);
                         String confirmation = input.nextLine();
                         System.out.println();
                         if(confirmation.equalsIgnoreCase("y") ){
@@ -121,7 +122,10 @@ public class ProductCatalogPage extends Page{
                 System.out.println("1) Update Inventory");
                 System.out.println("2) Order Packed Notification");
                 System.out.println();   
-                break;             
+                break; 
+            default:
+                System.out.println("You are not authorized to use this system.");
+                break;        
         }
         
         selectCatalog(custDetail, selectedProducts);

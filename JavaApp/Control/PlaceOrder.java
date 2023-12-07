@@ -45,8 +45,11 @@ public class PlaceOrder {
                     orderContext.updateOrder(cancelwrapper, Delivery_type);
                 }
                 else
-                System.out.println("Error placing order.");
-            }catch (Exception e) {
+                    System.out.println("Error placing order.");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 		return cancelwrapper;

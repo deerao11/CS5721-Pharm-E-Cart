@@ -29,33 +29,33 @@ public class ProductRepository {
                      .POST(HttpRequest.BodyPublishers.ofString(jsonData))
                     .build();
             HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//            System.out.println(response.statusCode());
-//            System.out.println(response.body());
     
-            if (response.statusCode() == 200){
-                JSONArray jsonArray = new JSONArray(response.body().toString());
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String productId = jsonObject.getString("product_id");
-                    String productName = jsonObject.getString("product_name");
-                    String productDescription = jsonObject.getString("product_description");
-                    double quantity = jsonObject.getDouble("quantity");
-                    double price = jsonObject.getDouble("price");
-                    int category = jsonObject.getInt("category_id");
+                if (response.statusCode() == 200){
+                    JSONArray jsonArray = new JSONArray(response.body().toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String productId = jsonObject.getString("product_id");
+                        String productName = jsonObject.getString("product_name");
+                        String productDescription = jsonObject.getString("product_description");
+                        double quantity = jsonObject.getDouble("quantity");
+                        double price = jsonObject.getDouble("price");
+                        int category = jsonObject.getInt("category_id");
 
-                    ProductDetail product = new ProductDetail(productId, productName,productDescription,quantity,price,category);
-                    if (product.quantity > 0) {
-                        productDetails.add(product);
+                        ProductDetail product = new ProductDetail(productId, productName,productDescription,quantity,price,category);
+                        if (product.quantity > 0) {
+                            productDetails.add(product);
+                        }
                     }
+                    return productDetails;
+                    
+                }else {
+                    System.err.println("Error: Unable to fetch data");
+                    return productDetails;
                 }
-                return productDetails;
-                
-            }else {
-                System.err.println("Error: Unable to fetch data");
-                return productDetails;
-    
-            
-            }}catch (Exception ex){
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+            } catch (Exception ex){
               System.out.println("error while fetching products : "+ex.getMessage());
             }
         return  productDetails;

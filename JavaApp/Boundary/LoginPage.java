@@ -23,10 +23,8 @@ public class LoginPage extends Page {
 
         System.out.print("User ID: ");
         userId = input.nextLine();
-//   char[] hiddenPassword = System.console().readPassword("Password: ");
-      System.out.print("\nPassword: ");
-       // password = String.valueOf(hiddenPassword);
-        password = input.nextLine();
+        char[] hiddenPassword = System.console().readPassword("Password: ");
+        password = String.valueOf(hiddenPassword);
         
         System.out.println();
     }

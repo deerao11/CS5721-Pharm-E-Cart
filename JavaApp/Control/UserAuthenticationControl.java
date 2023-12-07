@@ -67,8 +67,11 @@ public class UserAuthenticationControl {
                 return custDetail;
             }
             else
-            return null;
-        }catch (Exception e) {
+                return null;
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -89,9 +92,9 @@ public class UserAuthenticationControl {
             System.out.println(response.statusCode());
             System.out.println(response.body());
             if (response.statusCode() == 200)
-            return true;
+                return true;
             else
-            return false;
+                return false;
         }catch (Exception e) {
             e.printStackTrace();
         }

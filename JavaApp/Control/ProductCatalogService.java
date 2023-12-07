@@ -15,6 +15,7 @@ public class ProductCatalogService {
     Scanner input = new Scanner(System.in);
     public String deliveryOptions = "Home Delivery and Store Pickup.";
     Map<String,Integer> prodMap = new HashMap<>();
+    public static final String choiceQuestion = "Your Choice: ";
 
     public void selectProducts(List<ProductDetail> prodDetails, CustomerDetail custDetail, List<CartWrapper> selectedProductsParam) {
         productDetails = prodDetails;
@@ -27,7 +28,7 @@ public class ProductCatalogService {
         }
         System.out.println();
         System.out.println("Enter the ID of the product to order or enter 0 to go back to a different category.");
-        System.out.print("Your choice: ");
+        System.out.print(choiceQuestion);
         String productID = input.nextLine();
         if(productID.equals("0")){
             ProductCatalogPage pcp = new ProductCatalogPage();
@@ -42,7 +43,7 @@ public class ProductCatalogService {
     public void displayNeedMoreProducts(CustomerDetail custDetail) {
         System.out.println();
         System.out.println("Enter Y if you want to add more products or N if you are done adding products");
-        System.out.print("Your choice: ");
+        System.out.print(choiceQuestion);
         String needMoreProducts = input.nextLine();
         if (needMoreProducts.equals("y") || needMoreProducts.equals("Y")) {
                 selectProducts(productDetails, custDetail, selectedProducts);
@@ -56,7 +57,7 @@ public class ProductCatalogService {
     public void displayCheckoutQuestion(CustomerDetail custDetail) {
         System.out.println();
         System.out.println("Enter Y if you want to checkout or N if you want to add more products");
-        System.out.print("Your choice: ");
+        System.out.print(choiceQuestion);
         String checkout = input.nextLine();
         if (checkout.equals("y") || checkout.equals("Y")) {
             System.out.println("Checking out");
@@ -74,7 +75,7 @@ public class ProductCatalogService {
         String productName = productDetails.get(productID).name;
         System.out.println();
         System.out.println("Enter the quantity of " +productName+ " you would like to order");
-        System.out.print("Your choice: ");
+        System.out.print(choiceQuestion);
         int quantity = input.nextInt();
         input.nextLine();
         if (existingQuantity >= quantity) {
