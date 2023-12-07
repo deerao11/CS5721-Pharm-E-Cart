@@ -28,7 +28,15 @@ class OrderContext {
 
         state.updateOrder(this, orderStatus, delivery_type);
     }
+
+    /**
+     * command pattern implementation
+     * @param cw
+     * @param updateStatus
+     */
     public void sendUpdate(List<UpdateWrapper> cw, String updateStatus) {
-        updateOrder.updateOrder(cw, updateStatus);
+        UpdateOrderCommand uo = new UpdateOrderCommand(updateOrder,cw, updateStatus);
+        uo.execute();
+//        updateOrder.updateOrder(cw, updateStatus);
     }
 }

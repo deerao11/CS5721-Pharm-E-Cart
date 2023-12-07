@@ -15,6 +15,8 @@ class ConfirmedState implements IOrderState {
     public void updateOrder(OrderContext context, List<UpdateWrapper> orderStatus, String delivery_type) {
         System.out.println("Order Confirmed successfully");
         context.sendUpdate(orderStatus, "Confirmed");
+//        UpdateOrderCommand uo = new UpdateOrderCommand( new UpdateOrder(),orderStatus, "Confirmed");
+//        uo.execute();
         context.setState(new OrderPackedState());
         context.updateOrder(orderStatus, delivery_type);
       
