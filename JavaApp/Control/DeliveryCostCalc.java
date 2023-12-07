@@ -6,15 +6,6 @@ import java.util.*;
 
 public class DeliveryCostCalc {
     String confirmMsg;
-
-    // create order id, delivery method
-//                1. DeliveryCostCalc class
-//                   2. display()
-//                    3. clculate()
-//
-//                String orderId= "ABC-123";
-//                String deliveryMethod = "";
-    //calculate delivery price
     double totalCost = 0;
 
     public double getDeliveryCost() {

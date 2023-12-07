@@ -82,7 +82,7 @@ public class OrderCheckout {
                     OrderWrapper ow  = new OrderWrapper(customerID, cartNum, deliveryOptions);
                     orderwrapper.add(ow);
                     Order oo = new Order();
-                    oo.OrderDetail(orderwrapper, cw);
+                    oo.OrderDetail(orderwrapper);
                     
                 }
                 else {

@@ -10,6 +10,7 @@ public class LoginPage extends Page {
     private String userId;
     private String password;
 
+    @Override
     public void start(){
         System.out.println("\nLogin Page");
         drawDivider("*");

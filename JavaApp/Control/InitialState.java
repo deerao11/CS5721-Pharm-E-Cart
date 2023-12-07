@@ -38,7 +38,6 @@ class InitialState implements IOrderState {
             else {
             System.out.println("You took more than 2 minutes to cancel the order");
             System.out.println("Order cannot be cancelled");
-            //context.setState(new OrderPackedState());
         }
          context.updateOrder(orderStatus, delivery_type);
         }
