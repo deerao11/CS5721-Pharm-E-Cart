@@ -312,13 +312,11 @@ class PlaceOrderClass:
 			cur = conn.cursor()
 			cur.execute(dQry)
 			conn.commit()
-
 			# create_email_and_send(data['customer_id'],'Confirmed',data['order_number'])
-
 			result = {
-				"msg": "order created sucessfully",
-				"OrderNo": data["order_number"],
-				"ordertime": now.strftime("%Y-%m-%d %H:%M:%S"),
+				msg: "order created sucessfully",
+				OrderNo: data["order_number"],
+				ordertime: now.strftime("%Y-%m-%d %H:%M:%S"),
 			}
 			resp.status = falcon.HTTP_200
 			resp.body = json.dumps(result)
@@ -340,7 +338,7 @@ class UpdateOrderClass:
 			cur.execute(Uqry)
 			conn.commit()
 			create_email_and_send(data['customer_id'],data['order_status'],data['order_number'])
-			result = {"msg":"order status updated sucessfully","OrderNo":data['order_number'],'updatetime':now.strftime("%Y-%m-%d %H:%M:%S")}
+			result = {msg:"order status updated sucessfully",OrderNo:data['order_number'], updatetime:now.strftime("%Y-%m-%d %H:%M:%S")}
 			resp.status = falcon.HTTP_200
 			resp.body = json.dumps(result)
 		else:
@@ -410,6 +408,27 @@ class updateInventoryClass:
 			resp.status = falcon.HTTP_400
 			resp.body = json.dumps(result)
 
+class getCustomerOrdernoClass:
+	def on_post(self,req,resp):
+		conn = conn_db()
+		data = json.loads(req.stream.read())
+		if 'order_number' in data:
+			sQry = "SELECT product_list.product_name,product_list.product_description,order_details.quantity,order_details.price,order_details.datetime,order_details.delivery_type,order_details.order_status,order_details.order_number FROM orders.order_details INNER JOIN products.product_list ON order_details.product_id=product_list.product_id where order_details.order_number = '{0}'".format(data['order_number'])
+			print(sQry)
+			cur = conn.cursor()
+			cur.execute(sQry)
+			result = cur.fetchall()
+			result_list = []
+			for row in result:
+				result_list.append(row)
+			resp.status = falcon.HTTP_200
+			resp.body = json.dumps(result)
+
+		else:
+			result = {"error":"required params missing"}
+			resp.status = falcon.HTTP_400
+			resp.body = json.dumps(result)
+
 class updateInventoryPharmacists:
 	def on_post(self,req,resp):
 		conn = conn_db()
@@ -464,6 +483,8 @@ api.add_route('/getInventoryProducts', getInventoryProductsClass())
 api.add_route('/updateInventory', updateInventoryClass())
 
 api.add_route('/updateInventoryPharmacists', updateInventoryPharmacists())
+
+api.add_route('/getCustomerOrderno', getCustomerOrdernoClass())
 
 # if __name__ == '__main__':
 #     with make_server('', 8000, api) as httpd:
