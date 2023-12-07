@@ -5,7 +5,7 @@ import Control.UserAuthenticationControl;
 
 public class RegisterPage extends Page {
     private String fName, lName, emailId, username, password, ppsn, address, eircode;
-
+    @Override
     public void start(){
         System.out.println("\nRegister Page");
         drawDivider("*");
@@ -29,10 +29,8 @@ public class RegisterPage extends Page {
         System.out.print("Username: ");
         username = input.nextLine();
 
-//        char[] hiddenPassword = System.console().readPassword("Password: ");
-        System.out.print("\nPassword: ");
-//        password = String.valueOf(hiddenPassword);
-        password = input.nextLine();
+        char[] hiddenPassword = System.console().readPassword("Password: ");
+        password = String.valueOf(hiddenPassword);
 
         System.out.print("PPSN No: ");
         ppsn = input.nextLine();

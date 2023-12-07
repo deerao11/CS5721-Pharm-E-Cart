@@ -14,7 +14,6 @@ import Entity.OutOfStockProductWrapper;
 
 public class ProductCatalogPage extends Page{
     private String catalogNumber;
-    private String productNumber;
     Scanner input = new Scanner(System.in);
     List<ProductDetail> productDetails;
     public static final String choiceQuestion = "Your Choice: ";
@@ -23,7 +22,7 @@ public class ProductCatalogPage extends Page{
     public ProductCatalogPage(){
         catalogNumber = "";
     }
-    
+    @Override
     public void start(){
         System.out.println("\nProduct Catalog");
         drawDivider("*");
@@ -31,7 +30,6 @@ public class ProductCatalogPage extends Page{
     }
 
     public void selectCatalog(CustomerDetail custDetail,  List<CartWrapper> selectedProducts){
-        System.out.println("Customer role is "+custDetail.role);
         if (custDetail.role.equals("Customer")) {
             System.out.println("Select a product catalog by typing the serial number.");
             System.out.print(choiceQuestion);
@@ -40,7 +38,7 @@ public class ProductCatalogPage extends Page{
             switch(catalogNumber) {
                 case "1":
                 case "2":
-                    displayProducts(catalogNumber, selectedProducts);
+                    displayProducts(catalogNumber);
                     ProductCatalogService pcs = new ProductCatalogService();
                     pcs.deliveryOptions = deliveryOptions;
                     pcs.selectProducts(productDetails, custDetail, selectedProducts);
@@ -131,7 +129,7 @@ public class ProductCatalogPage extends Page{
         selectCatalog(custDetail, selectedProducts);
     }
 
-    public void displayProducts(String catalogNumber, List<CartWrapper> selectedProducts) {
+    public void displayProducts(String catalogNumber) {
         ProductRepository productFetcher = new ProductRepository();
         productDetails = productFetcher.fetchData(catalogNumber);
         System.out.println(String.format("Available Products for catalog number %s : \n",catalogNumber ));

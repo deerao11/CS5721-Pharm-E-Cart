@@ -39,8 +39,6 @@ public class PlaceOrder {
                     String orderTime = jsonObject.getString("ordertime");
                     UpdateWrapper cw = new UpdateWrapper(orderId, orderTime,ow.get(0).custId);
                     cancelwrapper.add(cw);
-                    // Order od = new Order();
-                    // od.updateOrder(cancelwrapper);
                      OrderContext orderContext = new OrderContext();
                     orderContext.updateOrder(cancelwrapper, Delivery_type);
                 }
