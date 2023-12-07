@@ -88,7 +88,10 @@ public class OrderCheckout {
                 else {
                     System.out.println("Error moving things into cart");
                 }
-            }catch (Exception e) {
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         return orderwrapper;

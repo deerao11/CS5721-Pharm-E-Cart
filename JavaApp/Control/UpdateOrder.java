@@ -46,8 +46,11 @@ public class UpdateOrder {
                     }
                 }
                 else
-                System.out.println("Error updating status.");
-            }catch (Exception e) {
+                    System.out.println("Error updating status.");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 		return orderNo;

@@ -36,6 +36,9 @@ public class PharmacyController implements IObserver {
             } else {
                 System.out.println("Error occurred during cancellation. ");
             }
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,8 +70,11 @@ public class PharmacyController implements IObserver {
                 return oosProdList;
             }
             else
-            return null;
-        }catch (Exception e) {
+                return null;
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -91,6 +97,9 @@ public class PharmacyController implements IObserver {
             } else {
                 System.out.println("Error occurred during inventory update. ");
             }
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

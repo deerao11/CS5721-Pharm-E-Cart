@@ -70,8 +70,11 @@ public class OrderController implements IObservable {
                 return orderSummary;
             }
             else
-            return null;
-        }catch (Exception e) {
+                return null;
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
