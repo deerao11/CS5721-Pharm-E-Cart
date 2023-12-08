@@ -17,5 +17,11 @@ public class MainTest {
 		boolean result = userAuthenticationControl.register();
 		Assertions.assertTrue(result);
 	}
+	@Test
+	public void validCatalogDetails() {
+		String catalogId = "1";
+		DemoTest test = new DemoTest();
+		test.validCatalogDetails(catalogId);
+	}
 
 }
