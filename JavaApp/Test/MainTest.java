@@ -11,6 +11,11 @@ public class MainTest {
 	test.validLogin("sheeth", "sheeth");
 	test.inValidLogin("Sheethal", "Sheethal");
 	}
-    
+    @Test
+	public void validRegistration(String fName,String lName,String username,String password,String ppsn,String address,String eircode,String emailId) {
+		UserAuthenticationControl userAuthenticationControl = new UserAuthenticationControl(fName, lName, username, password, ppsn, address, eircode, emailId);
+		boolean result = userAuthenticationControl.register();
+		Assertions.assertTrue(result);
+	}
 
 }
