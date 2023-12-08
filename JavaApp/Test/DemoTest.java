@@ -50,5 +50,20 @@ public class DemoTest {
 //		Assert.assertEquals(product.getPrice(), "200.0");
 //		Assert.assertEquals(product.getQuantity(), "31");
 	}
+		@Test
+	public boolean isValidCatalog(String catId) {
+		ProductRepository pf = new ProductRepository();
+		List<ProductDetail> pd = pf.fetchData(catId);
+		for(int i=0; i<pd.size(); i++) {
+			if(pd.get(i).toString().contains("Category ID: "+ catId)) {
+				System.out.println("Found the catalog");
+
+			}else {
+				return false;
+			}
+		}
+		
+  return true;
+ }
 	
 }

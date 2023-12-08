@@ -23,5 +23,11 @@ public class MainTest {
 		DemoTest test = new DemoTest();
 		test.validCatalogDetails(catalogId);
 	}
-
+    @Test
+	public void isValidCatalog() {
+		DemoTest test = new DemoTest();
+		boolean cat = test.isValidCatalog( " 1");
+		Assertions.assertFalse(cat);
+		
+	}
 }
