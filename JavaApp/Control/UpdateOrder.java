@@ -18,6 +18,10 @@ public class UpdateOrder {
     public String jsonData;
     public String orderNo;
 
+    /*
+     * This method is called when the status of the order changes in any way. It calls the
+     * database through the API to update the same.
+     */
     public String updateOrder(List<UpdateWrapper> cw, String updateStatus) {
     	jsonData = "{\"customer_id\":\""+cw.get(0).custId+"\",\"order_number\":\""+cw.get(0).orderId+"\",\"order_status\":\""+updateStatus+"\"}";
         
@@ -37,6 +41,10 @@ public class UpdateOrder {
                 if (response.statusCode() == 200) {
                     JSONObject jsonObject = new JSONObject(response.body().toString());
                     System.out.println(jsonObject.get("msg"));
+                    /*
+                     * When the order is cancelled we would like to invoke the Observable so that it
+                     * can notify the observers of the change.
+                     */
                     if (updateStatus.equals("Cancelled")) {
                         orderNo = jsonObject.getString("OrderNo");
                         OrderController oc = new OrderController();

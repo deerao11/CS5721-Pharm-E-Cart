@@ -41,7 +41,7 @@ public class UserAuthenticationControl {
         this.email = email;
     }
 
-        
+    // This method is called when a user is trying to login to the application
     public CustomerDetail authenticate() {
         try {
             var uri = URI.create(baseURL+"login");
@@ -77,6 +77,7 @@ public class UserAuthenticationControl {
         return null;
     }
 
+    // This method is called when a new user is trying to register on to the application
     public boolean register() {
         try {
             var uri = URI.create(baseURL+"register");

@@ -19,6 +19,10 @@ public class PharmacyController implements IObserver {
         manageInventory(orderId);
     }
 
+    /*
+     * This method is used to update the inventory after a specific order has
+     * been cancelled i.e any products in this order are added back to the inventory.
+     */
     public void manageInventory(String orderId) {
         try {
             var uri = URI.create(baseURL+"updateInventory");
@@ -44,6 +48,11 @@ public class PharmacyController implements IObserver {
         }
     }
 
+    /*
+     * This method is used to display the inventory that is about to be out of stock
+     * from the inventory, for which requests have been raised to the vendor. It also
+     * displays the status of the request. This option is only available to the Pharmacist.
+     */
     public List<OutOfStockProductWrapper> showInventoryOutOfStock() {
         try {
             var uri = URI.create(baseURL+"getInventoryProducts");
@@ -80,6 +89,11 @@ public class PharmacyController implements IObserver {
         return null;
     } 
 
+    /*
+     * This method is used by the Pharmacist to confirm receival of the products
+     * which were sent by the vendor. It calls the API to update the status of the
+     * request which was created to "Delivered"
+     */
     public void vendorUpdateInventory(CustomerDetail custDetail) {
         try {
             var uri = URI.create(baseURL+"updateInventoryPharmacists");

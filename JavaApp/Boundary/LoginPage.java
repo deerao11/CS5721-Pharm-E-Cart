@@ -24,10 +24,9 @@ public class LoginPage extends Page {
 
         System.out.print("User ID: ");
         userId = input.nextLine();
-//        char[] hiddenPassword = System.console().readPassword("Password: ");
-        System.out.print("Password: ");
-        password = input.nextLine();
-//        password = String.valueOf(hiddenPassword);
+        //This  helps in taking the password as the input from the console without displaying it on the screen.
+        char[] hiddenPassword = System.console().readPassword("Password: ");
+        password = String.valueOf(hiddenPassword);
         
         System.out.println();
     }

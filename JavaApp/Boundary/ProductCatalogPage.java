@@ -51,7 +51,7 @@ public class ProductCatalogPage extends Page{
                     orderSummary.forEach(orderDetail -> {
                     System.out.println("Order ID: " + orderDetail.getOrderNum());
                     System.out.println("Order Time: " + orderDetail.getOrderTime());
-                    System.out.println("Order price: " + orderDetail.getPrice());
+                    System.out.println("Order price: " + orderDetail.getPrice()+"€");
                     System.out.println("Order Delivery type: " + orderDetail.getDelType());
                     System.out.println("Order Status: " + orderDetail.getOrderStatus());
                     System.out.println();

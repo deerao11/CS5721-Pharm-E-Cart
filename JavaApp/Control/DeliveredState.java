@@ -12,7 +12,7 @@ class DeliveredState implements IOrderState {
         if (!delivery_type.equals("Store pickup only")){
 		System.out.println("Order out for delivery");
 		context.sendUpdate(orderStatus, "Delivered");
-		 }
+		}
         
     }
 }
