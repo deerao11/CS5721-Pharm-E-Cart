@@ -39,5 +39,16 @@ public class DemoTest {
 	DemoTest test = new DemoTest();
 	test.validRegistration("Sheethal", "H", "SheeThal"+Math.random(), "Sheet", "121324", "Banglore", "etfrgwsf", "sheetha"+Math.random()+"@gmail.com");
 	}
-
+ 
+    	@Test
+	public void validCatalogDetails(String catalogId) {
+		ProductRepository pf = new ProductRepository();
+		List<ProductDetail> pd = pf.fetchData(catalogId);
+			ProductDetail product = pd.get(0);
+			Assertions.assertEquals(product.getId(), "1");
+			Assertions.assertEquals(product.getName(), "crocin");
+//		Assert.assertEquals(product.getPrice(), "200.0");
+//		Assert.assertEquals(product.getQuantity(), "31");
+	}
+	
 }
