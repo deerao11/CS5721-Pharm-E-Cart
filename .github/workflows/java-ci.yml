@@ -21,7 +21,7 @@ jobs:
           java-version: '11'
 
       - name: Compile Java code
-        run: javac -d bin JavaApp/*.java
+        run: javac -cp .;json-20231013.jar -d bin JavaApp/*.java
 
       - name: Run tests
         run: java -cp bin MainTest
