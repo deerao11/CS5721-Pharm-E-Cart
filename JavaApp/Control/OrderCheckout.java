@@ -22,6 +22,7 @@ public class OrderCheckout {
     String jsonData="[";
     int customerID ;
 
+    //This method is called when the customer clicks on "Add to cart"
     public List<OrderWrapper> checkout(List<CartWrapper> cw, CustomerDetail cd, String deliveryOptions) {
         double totalItemCost = 0,deliveryCost=0;
         // this is for the redundant order qty prob.
@@ -31,6 +32,7 @@ public class OrderCheckout {
         List<UpdateWrapper> updatewrap= new ArrayList<>();
         Scanner input = new Scanner(System.in);
     	List<OrderWrapper> orderwrapper = new ArrayList<>();
+        //This loop checks if a product has already been selected and increments the quantity of product accordingly 
         for(int i=0; i < cw.size(); i++) {
             customerID=cw.get(i).custId;
             final String uniqId = cw.get(i).categoryId + "-" + cw.get(i).prodId+"-"+cw.get(i).getCustId();
@@ -43,6 +45,7 @@ public class OrderCheckout {
             productPrice.put(uniqId, cw.get(i).getPrice());
         }
         int count=0;
+        // This for loop is to construct the jsonBody properly in case there are multiple products in an order
        for(Map.Entry<String, Integer> entry: existingProducts.entrySet()){
            String splitted[]= entry.getKey().split("-");
            double price = productPrice.get(entry.getKey())*entry.getValue();

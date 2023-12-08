@@ -17,6 +17,10 @@ public class ProductCatalogService {
     Map<String,Integer> prodMap = new HashMap<>();
     public static final String choiceQuestion = "Your Choice: ";
 
+    /*
+     * This method is called when the user has selected the category from the catalog and 
+     * now has to select the product he would like to order.
+     */
     public void selectProducts(List<ProductDetail> prodDetails, CustomerDetail custDetail, List<CartWrapper> selectedProductsParam) {
         productDetails = prodDetails;
         selectedProducts = selectedProductsParam;
@@ -40,6 +44,10 @@ public class ProductCatalogService {
         }
     }
 
+    /*
+     * This method is called when the user has selected some products and the system prompts 
+     * if they owuld like to select more products.
+     */
     public void displayNeedMoreProducts(CustomerDetail custDetail) {
         System.out.println();
         System.out.println("Enter Y if you want to add more products or N if you are done adding products");
@@ -54,6 +62,10 @@ public class ProductCatalogService {
             }
     }
 
+    /*
+     * This method is called when the user has selected some products and system prompts if they
+     * would like to checkout to the cart.
+     */
     public void displayCheckoutQuestion(CustomerDetail custDetail) {
         System.out.println();
         System.out.println("Enter Y if you want to checkout or N if you want to add more products");
@@ -69,7 +81,11 @@ public class ProductCatalogService {
             displayCheckoutQuestion(custDetail);
         }
     }
-
+    
+    /*
+     * This method is called when the user has selected a product and the system would
+     * like to know the quantity of the products which the customer would like to order.
+     */
     public void requestQuantity(int productID, CustomerDetail custDetail) {
         int existingQuantity = (int)productDetails.get(productID).quantity;
         String productName = productDetails.get(productID).name;

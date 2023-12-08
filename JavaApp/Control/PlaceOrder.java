@@ -15,6 +15,10 @@ public class PlaceOrder {
 	public String baseURL = "https://falconer2-71714182580c.herokuapp.com/";
     public String jsonData;
 
+    /*
+     * This method is called when the customer reviews the cart and places the order.
+     * It also calls the class that observes the state of the order from here on.
+     */
     public List<UpdateWrapper> placeOrder(List<OrderWrapper> ow) {
     	List<UpdateWrapper> cancelwrapper = new ArrayList<>();
        String Delivery_type= ow.get(0).delType;
@@ -39,7 +43,7 @@ public class PlaceOrder {
                     String orderTime = jsonObject.getString("ordertime");
                     UpdateWrapper cw = new UpdateWrapper(orderId, orderTime,ow.get(0).custId);
                     cancelwrapper.add(cw);
-                     OrderContext orderContext = new OrderContext();
+                    OrderContext orderContext = new OrderContext();
                     orderContext.updateOrder(cancelwrapper, Delivery_type);
                 }
                 else

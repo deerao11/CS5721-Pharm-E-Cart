@@ -26,7 +26,11 @@ public class OrderController implements IObservable {
     public void notifyObservers(String orderId) {
         observerList.forEach(observer -> observer.update(orderId));
     }
-
+    /*
+     * This method is used to view the previous customer orders.
+     * It iterates through the jsonData received from the API and aggregates the price
+     * of the medicines rolling up to the same order number.
+     */
     public List<OrderDetailWrapper> getPastOrders(int customerId) {
         try {
             var uri = URI.create("https://falconer2-71714182580c.herokuapp.com/getCustomerOrders");

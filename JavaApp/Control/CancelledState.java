@@ -15,10 +15,8 @@ class CancelledState implements IOrderState {
     //@Override
     public void updateOrder(OrderContext context, List<UpdateWrapper> orderStatus, String delivery_type) {
         
-            System.out.println("Order Cancelled successfully");
-           context.sendUpdate(orderStatus, "Cancelled");
-        //        UpdateOrderCommand uo = new UpdateOrderCommand( new UpdateOrder(),orderStatus, "Cancelled");
-//        uo.execute();
+        System.out.println("Order Cancelled successfully");
+        context.sendUpdate(orderStatus, "Cancelled");
         
     }
 }
