@@ -34,5 +34,10 @@ public class DemoTest {
 	        
 	}
 	
+	@Test
+	public void registrationTest() {
+	DemoTest test = new DemoTest();
+	test.validRegistration("Sheethal", "H", "SheeThal"+Math.random(), "Sheet", "121324", "Banglore", "etfrgwsf", "sheetha"+Math.random()+"@gmail.com");
+	}
 
 }
