@@ -11,6 +11,8 @@ import Entity.UpdateWrapper;
 import Entity.OrderWrapper;
 import Control.OrderContext;
 
+//State interface
 interface IOrderState {
     void updateOrder(OrderContext context, List<UpdateWrapper> orderStatus, String delivery_type);
 }
+

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import Entity.UpdateWrapper;
 import Entity.OrderWrapper;
 
+//concrete state classes
 class DeliveredState implements IOrderState {
     @Override
     public void updateOrder(OrderContext context, List<UpdateWrapper> orderStatus, String delivery_type ) {
