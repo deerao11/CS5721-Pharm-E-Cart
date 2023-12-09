@@ -21,7 +21,7 @@ public class DemoTest {
 
 	        CustomerDetail cd = userAuthenticationControl.authenticate();
 	        Assertions.assertNotNull(cd);
-    }
+       }
 	
 	@Test
     public void inValidLogin(String userId, String password) {
@@ -31,16 +31,16 @@ public class DemoTest {
 
 	        CustomerDetail cd = userAuthenticationControl.authenticate();
 	        Assertions.assertNull(cd);
-	        
-	}
+      }
 	
 	@Test
-	public void registrationTest() {
-	DemoTest test = new DemoTest();
-	test.validRegistration("Sheethal", "H", "SheeThal"+Math.random(), "Sheet", "121324", "Banglore", "etfrgwsf", "sheetha"+Math.random()+"@gmail.com");
-	}
- 
-    	@Test
+	public void validRegistration(String fName,String lName,String username,String password,String ppsn,String address,String eircode,String emailId) {
+		UserAuthenticationControl userAuthenticationControl = new UserAuthenticationControl(fName, lName, username, password, ppsn, address, eircode, emailId);
+		boolean result = userAuthenticationControl.register();
+		Assertions.assertTrue(result);
+   }
+	
+	@Test
 	public void validCatalogDetails(String catalogId) {
 		ProductRepository pf = new ProductRepository();
 		List<ProductDetail> pd = pf.fetchData(catalogId);
@@ -50,7 +50,8 @@ public class DemoTest {
 //		Assert.assertEquals(product.getPrice(), "200.0");
 //		Assert.assertEquals(product.getQuantity(), "31");
 	}
-		@Test
+
+	@Test
 	public boolean isValidCatalog(String catId) {
 		ProductRepository pf = new ProductRepository();
 		List<ProductDetail> pd = pf.fetchData(catId);
@@ -65,5 +66,4 @@ public class DemoTest {
 		
   return true;
  }
-	
 }

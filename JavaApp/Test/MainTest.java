@@ -1,9 +1,7 @@
 package Test;
-
-
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 public class MainTest {
 	@Test
 	public void loginTest() {
@@ -11,23 +9,27 @@ public class MainTest {
 	test.validLogin("sheeth", "sheeth");
 	test.inValidLogin("Sheethal", "Sheethal");
 	}
-    @Test
-	public void validRegistration(String fName,String lName,String username,String password,String ppsn,String address,String eircode,String emailId) {
-		UserAuthenticationControl userAuthenticationControl = new UserAuthenticationControl(fName, lName, username, password, ppsn, address, eircode, emailId);
-		boolean result = userAuthenticationControl.register();
-		Assertions.assertTrue(result);
+
+	@Test
+	public void registrationTest() {
+	DemoTest test = new DemoTest();
+	test.validRegistration("Sheethal", "H", "SheeThal"+Math.random(), "Sheet", "121324", "Banglore", "etfrgwsf", "sheetha"+Math.random()+"@gmail.com");
 	}
+
 	@Test
 	public void validCatalogDetails() {
 		String catalogId = "1";
 		DemoTest test = new DemoTest();
 		test.validCatalogDetails(catalogId);
 	}
-    @Test
+
+
+	@Test
 	public void isValidCatalog() {
 		DemoTest test = new DemoTest();
 		boolean cat = test.isValidCatalog( " 1");
 		Assertions.assertFalse(cat);
 		
 	}
+
 }
