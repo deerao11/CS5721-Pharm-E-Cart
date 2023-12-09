@@ -10,13 +10,11 @@ import org.json.JSONObject;
 import Entity.OrderWrapper;
 import Entity.UpdateWrapper;
 
-
+//concrete state classes
 class CancelledState implements IOrderState {
     //@Override
     public void updateOrder(OrderContext context, List<UpdateWrapper> orderStatus, String delivery_type) {
-        
-        System.out.println("Order Cancelled successfully");
-        context.sendUpdate(orderStatus, "Cancelled");
-        
+         System.out.println("Order Cancelled successfully");
+        context.sendUpdate(orderStatus, "Cancelled");  
     }
 }
