@@ -18,18 +18,15 @@ public class MainTest {
 
 	@Test
 	public void validCatalogDetails() {
-		String catalogId = "1";
+		//String catalogId = "1";
 		DemoTest test = new DemoTest();
-		test.validCatalogDetails(catalogId);
+		test.validCatalogDetails(1);
 	}
-
 
 	@Test
 	public void isValidCatalog() {
 		DemoTest test = new DemoTest();
 		boolean cat = test.isValidCatalog( " 1");
-		Assertions.assertFalse(cat);
-		
-	}
-
+		Assertions.assertFalse(cat);		
+	}	
 }

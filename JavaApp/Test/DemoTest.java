@@ -16,8 +16,10 @@ public class DemoTest {
 	@Test
     public void validLogin(String userId, String password) {
 		UserAuthenticationControl userAuthenticationControl = new UserAuthenticationControl(
-	            userId, password);
-            CustomerDetail cd = userAuthenticationControl.authenticate();
+	            userId, password
+	        );
+
+	        CustomerDetail cd = userAuthenticationControl.authenticate();
 	        Assertions.assertNotNull(cd);
        }
 	
@@ -36,7 +38,8 @@ public class DemoTest {
 		UserAuthenticationControl userAuthenticationControl = new UserAuthenticationControl(fName, lName, username, password, ppsn, address, eircode, emailId);
 		boolean result = userAuthenticationControl.register();
 		Assertions.assertTrue(result);
-   }	
+   }
+	
 	@Test
 	public void validCatalogDetails(int catalogId) {
 		ProductRepository pf = new ProductRepository();
@@ -53,9 +56,11 @@ public class DemoTest {
 	public boolean isValidCatalog(String catId) {
 		ProductRepository pf = new ProductRepository();
 		List<ProductDetail> pd = pf.fetchData(catId);
-		for(int i=0; i<pd.size(); i++) {			
+		for(int i=0; i<pd.size(); i++) {
+			
 			if(pd.get(i).toString().contains("Category ID: "+ catId)) {
 				System.out.println("Found the catalog");
+
 			}else {
 				return false;
 			}
